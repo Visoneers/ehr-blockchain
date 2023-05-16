@@ -1,0 +1,92 @@
+.update-from .file-description {
+  font-size: 20px;
+  border-radius: 5px;
+  border: 0;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  padding: 2px 15px;
+  margin: 10px 0 30px 0;
+}
+
+.update-from .drop-fileinput {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  width: 350px;
+  height: 150px;
+  border: 2px dashed #4267b2;
+  border-radius: 20px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 10px 0 20px 0;
+}
+
+.update-from .drop-fileinput input {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.update-from .drop-fileinput:hover, .update-from .drop-fileinput .dragover {
+  opacity: 0.6;
+}
+
+.update-from .drop-fileinput .drop-fileinput-label {
+  text-align: center;
+  padding: 10px;
+}
+
+.update-from .drop-file-preview {
+  margin: 10px 0 15px 0;
+}
+
+.update-from .drop-file-preview .drop-file-preview-item {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 10px 0 10px 0;
+  border-radius: 20px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.update-from .drop-file-preview .drop-file-preview-item img, .update-from .drop-file-preview .drop-file-preview-item button {
+  width: 50px;
+}
+
+.update-from .drop-file-preview .drop-file-preview-item .drop-file-preview-item-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.update-from .drop-file-preview .drop-file-preview-item .drop-file-preview-item-info h4, .update-from .drop-file-preview .drop-file-preview-item .drop-file-preview-item-info h4 {
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.update-from .drop-file-preview .drop-file-preview-item:hover {
+  opacity: 1;
+}
+/*# sourceMappingURL=MDupdate.css.map */

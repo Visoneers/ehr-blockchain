@@ -4,6 +4,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useTheme } from '@emotion/react';
 import { tokens } from '../../assets/theme';
 import axios from '../../api/axios';
+import useAuth from '../../hooks/useAuth';
 
 // import { DesktopDatePicker, LocalizationProvider } from '@mui/lab';
 // import DateAdapter from '@mui/lab/AdapterMoment';
@@ -26,6 +27,7 @@ const NewDoctor = () => {
   const [matchPwd, setMatchPwd] = useState('');
   const [validMatch, setValidMatch] = useState(false);
 
+  const { auth, setAuth}=useAuth()
   useEffect(() => {
     setValidEmail(EMAIL_REGEX.test(email));
   }, [email])
@@ -81,8 +83,9 @@ const NewDoctor = () => {
     event.preventDefault()
 
     try {
+      
       const response = await axios.post(REGISTER_URL,
-        JSON.stringify({ email, pwd, values, role: '644e0ddae22255e5791984b9' }),
+        JSON.stringify({ email, password:pwd,...values,hospitalId:"645f6c4a86f0658cf9331db6" ,name:values.fullname,role: '644e0ddae22255e5791984b9' }),
         {
           headers: { 'Content-Type': 'application/json' },
           withCredentials: true
@@ -299,6 +302,7 @@ const initialFValues = {
   age: 0,
   dob: "",
   gender: "Male",
+  hospitalId:"",
   specialists: [""],
   mobileNo: "",
   address: "",
@@ -315,4 +319,4 @@ const genderItems = [
 const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
-const REGISTER_URL = '/register';
+const REGISTER_URL = '/auth/register';

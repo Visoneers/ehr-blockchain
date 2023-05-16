@@ -5,7 +5,7 @@ import axios from '../../api/axios';
 
 import "./Login.scss";
 
-const LOGIN_URL = '/auth';
+const LOGIN_URL = '/auth/login';
 
 const Login = () => {
     const { setAuth } = useAuth();
@@ -34,7 +34,7 @@ const Login = () => {
 
         try {
             const response = await axios.post(LOGIN_URL,
-                JSON.stringify({ user, pwd }),
+                JSON.stringify({ email:user, password:pwd }),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true

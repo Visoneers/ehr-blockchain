@@ -86,7 +86,7 @@ function App() {
 
 
             {/* Doctor Routes */}
-            <Route path="/" element={<Doctor />}>
+            <Route path="/doctor" element={<Doctor />}>
               <Route index element={<Dashboard />} />
               <Route path="users" element={<Users />} />
               <Route path="users/addnewuser" element={<NewUser />} />
@@ -100,9 +100,9 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
 
-            {/* <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+            <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
               <Route path="admin" element={<Admin />} />
-            </Route> */}
+            </Route>
 
             <Route path="unauthorized" element={<Unauthorized />} />
             <Route path="*" element={<Missing />} />

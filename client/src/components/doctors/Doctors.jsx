@@ -69,7 +69,7 @@ const Doctors = () => {
     <Box m="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="DOCTOR LIST" subtitle="Managing the Members" />
-        <Link to="/doctors/addnewdoctor">
+        <Link to="/hospitaladmin/doctors/addnewdoctor/">
           <Button sx={{ fontSize: "12px", padding: "12px", backgroundColor: colors.greenAccent[500], color: colors.grey[100], }}>
             <UserIcon style={{ height: 30, width: 30, padding: 5, marginRight: 7 }} />
             Add Doctor

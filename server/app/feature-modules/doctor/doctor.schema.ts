@@ -6,7 +6,7 @@ const doctorSchema=new BaseSchema({
 
     name:{
         type:String,
-        required:true
+        // required:true
     },
     email:{
         type:String,

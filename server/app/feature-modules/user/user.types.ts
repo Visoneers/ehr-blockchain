@@ -6,4 +6,8 @@ export interface IUser{
     role:string,
     insauranceId:string,
     societId:string
+    area:string,
+    state:string,
+    city:string,
+    pincode:number
 }

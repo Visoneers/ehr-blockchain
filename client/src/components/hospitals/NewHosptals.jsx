@@ -48,7 +48,7 @@ const NewHospital = () => {
 
     try {
       const response = await axios.post(REGISTER_URL,
-        JSON.stringify({ email, pwd, values }),
+        JSON.stringify({ email, password:pwd, ...values,role:"644e0db8e22255e5791984b7" }),
         {
           headers: { 'Content-Type': 'application/json' },
           withCredentials: true
@@ -142,8 +142,8 @@ const NewHospital = () => {
                   fullWidth
                   variant="outlined"
                   label="Phone Number"
-                  name="mobileNo"
-                  value={values.mobileNo}
+                  name="contact"
+                  value={values.contact}
                   onChange={handleInputChange}
                   margin="normal"
                 />
@@ -202,7 +202,7 @@ export default NewHospital;
 const initialFValues = {
   id: "0",
   name: "",
-  mobileNo: "",
+  contact: "",
   address: "",
   city: "",
   pinCode: "",
@@ -212,4 +212,4 @@ const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 
-const REGISTER_URL = '/register';
+const REGISTER_URL = '/auth/register';

@@ -1,0 +1,43 @@
+.mdrecord .account {
+  margin: 10px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.mdrecord .account .account-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.mdrecord .account .account-item .acount-item-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.mdrecord .account .account-item .acount-item-info img {
+  width: 70px;
+  margin-right: 20px;
+}
+
+.mdrecord .account .account-item .account-item-action {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.mdrecord .account .account-item .account-item-action button {
+  font-size: "20px";
+  padding: "20px 20px";
+  margin: 0 10px 0 10px;
+  font-weight: "bold";
+}
+/*# sourceMappingURL=MDrecord.css.map */

@@ -68,7 +68,7 @@ const Hospitals = () => {
             <Header title="HOSPITALS" subtitle="Managing The Hospital" />
             <Button sx={{ fontSize: "12px", padding: "12px", backgroundColor: colors.greenAccent[500], color: colors.grey[100], }}>
               <AdminIcon style={{ height: 30, width: 30, padding: 5, marginRight: 7 }} />
-              <Link to="/hospitals/addnewhospital">add new hospital</Link>
+              <Link to="/admin/hospitals/addnewhospital">add new hospital</Link>
             </Button>
           </Box>
         </Box>

@@ -1,7 +1,5 @@
 import React from 'react';
 import { Outlet } from "react-router-dom";
-
-import AuthContext from "../../context/AuthProvider";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from '../../components/topbar/Topbar';
 

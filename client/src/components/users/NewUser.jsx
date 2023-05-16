@@ -84,8 +84,11 @@ const NewUser = () => {
     event.preventDefault()
 
     try {
+      console.log(email, pwd, values);
       const response = await axios.post(REGISTER_URL,
-        JSON.stringify({ email, pwd, values, role:"644e0dc7e22255e5791984b8" }),
+        // JSON.stringify({ email:"rohitdivekar463@gmail.com", password:pwd,...values, name:values.fullName ,role:"644e0dc7e22255e5791984b8" }),
+       
+        JSON.stringify({ email,password:pwd, ...values, name:values.fullName,role:"644e0dc7e22255e5791984b8" }),
         {
           headers: { 'Content-Type': 'application/json' },
           withCredentials: true
@@ -97,6 +100,7 @@ const NewUser = () => {
       setEmail('');
       setPwd('');
       setMatchPwd('');
+      setErrors("")
     } catch (err) {
       if (!err?.response) {
         setErrors('No Server Response');
@@ -352,7 +356,7 @@ const initialFValues = {
   id: "0",
   pinCode: "",
   fullName: "",
-  email: "",
+  // email: "",
   mobileNo: "",
   city: "",
   gender: "Male",
@@ -376,4 +380,4 @@ const genderItems = [
 
 const EMAIL_REGEX = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REGISTER_URL = '/register';
+const REGISTER_URL = '/auth/register';

@@ -11,7 +11,8 @@ router.post(
     try {
         console.log(req.body)
         const data=req.body
-        const result=await authService.register(data)
+        const tokenData=res.locals.user
+        const result=await authService.register({data,tokenData})
         res.send(new ResponseHandler(result))
         
     } catch (error) {

@@ -17,7 +17,6 @@ const getAllUser = async (filter: any) => {
 }
 const findOne=async(filter:Partial<IDoctor>)=>await doctorModel.findOne(filter)
    
-
 const update=(filter:FilterQuery<IDoctor>,data:UpdateQuery<IDoctor>)=>doctorRepo.update(filter,data)
 
 const deleteUser=(filter:FilterQuery<IDoctor>)=>update(filter,{$set:{isDeleted:true}})
