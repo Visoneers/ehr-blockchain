@@ -1,0 +1,36 @@
+.mdrecord {
+    .account {
+        margin: 10px;
+        padding: 20px;
+        border-radius: 10px;
+
+
+        .account-item {
+            display: flex;
+            position: relative;
+            justify-content: space-between;
+
+            .acount-item-info {
+                display: flex;
+
+                img {
+                    width: 70px;
+                    margin-right: 20px;
+                }
+            }
+
+            .account-item-action {
+                display: flex;
+                align-items: center;
+
+                button {
+                    font-size: "20px";
+                    padding: "20px 20px";
+                    margin: 0 10px 0 10px;
+                    font-weight: "bold",
+                }
+            }
+
+        }
+    }
+}
