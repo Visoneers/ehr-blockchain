@@ -31,7 +31,12 @@ const menuOptions = [{
   "title": "Update Records",
   "to": "/admin/update",
   "icon": <UpdateIcon />
-},
+},{
+  "id": 5,
+  "title": "View Records",
+  "to": "/admin/records",
+  "icon": <UpdateIcon />
+}
 ]
 
 const Admin = () => {

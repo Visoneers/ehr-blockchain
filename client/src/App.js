@@ -64,12 +64,12 @@ function App() {
             <Route path="/admin" element={<Admin />}>
               <Route index element={<Dashboard />} />
               <Route path="users" element={<Users />} />
-              <Route path="users/newuser" element={<NewUser />} />
+              <Route path="users/addnewuser" element={<NewUser />} />
               <Route path="hospitals" element={<Hospitals />} />
               <Route path="hospitals/addnewhospital" element={<NewHospitals />} />
-              <Route path="update" element={<MDrecord />} />
+              <Route path="update" element={<MDrecord action="update" />} />
               <Route path="update/:userID" element={<MDupdate account={account} />} />
-              <Route path="records" element={<MDrecord />} />
+              <Route path="records" element={<MDrecord action="records" />} />
               <Route path="records/:userID" element={<ViewRecord />} />
             </Route>
 
@@ -80,7 +80,7 @@ function App() {
               <Route path="users/addnewuser" element={<NewUser />} />
               <Route path="doctors" element={<Doctors />} />
               <Route path="doctors/addnewdoctor" element={<NewDoctor />} />
-              <Route path="update" element={<MDrecord />} />
+              <Route path="update" element={<MDrecord action="update"/>} />
               <Route path="update/:userID" element={<MDupdate account={account} />} />
             </Route>
 

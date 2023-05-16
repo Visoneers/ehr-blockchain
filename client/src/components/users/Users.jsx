@@ -14,9 +14,8 @@ import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 const Users = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const location = useLocation();
   const navigate = useNavigate();
-
+  const location = useLocation();
   const [users, setUsers] = useState();
 
   useEffect(() => {
@@ -106,7 +105,7 @@ const Users = () => {
         <Box>
           <Box display="flex" justifyContent="space-between" alignItems="center">
             <Header title="USERS" subtitle="Managing The Users" />
-            <Link to="/users/addnewuser">
+            <Link to={`${location.pathname}/addnewuser`} >
               <Button sx={{ fontSize: "12px", padding: "12px", backgroundColor: colors.greenAccent[500], color: colors.grey[100], }}>
                 <UserIcon style={{ height: 30, width: 30, padding: 5, marginRight: 7 }} />
                 add new user
@@ -114,7 +113,6 @@ const Users = () => {
             </Link>
           </Box>
         </Box>
-
         <Box mt="25px" height="75vh"
           sx={{
             "& .MuiDataGrid-root": {

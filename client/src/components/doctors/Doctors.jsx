@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Box, Button, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "../header/Header";
@@ -11,6 +11,9 @@ import { ReactComponent as UserIcon } from '../../assets/icons/user.svg';
 const Doctors = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const location = useLocation();
+
+  
   const columns = [
     { field: "id", headerName: "ID" },
     {
@@ -69,7 +72,7 @@ const Doctors = () => {
     <Box m="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="DOCTOR LIST" subtitle="Managing the Members" />
-        <Link to="/hospitaladmin/doctors/addnewdoctor/">
+        <Link to={`${location.pathname}/addnewdoctor`}>
           <Button sx={{ fontSize: "12px", padding: "12px", backgroundColor: colors.greenAccent[500], color: colors.grey[100], }}>
             <UserIcon style={{ height: 30, width: 30, padding: 5, marginRight: 7 }} />
             Add Doctor

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Box, Button, IconButton, InputBase, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../assets/theme";
 import SearchIcon from "@mui/icons-material/Search";
@@ -11,10 +11,10 @@ import Header from "../header/Header";
 import "./MDrecord.scss";
 import "./Viewrecord.scss";
 
-const MDRecord = () => {
+const MDRecord = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  
+  const loaction = useLocation();
 
 
   return (
@@ -48,10 +48,7 @@ const MDRecord = () => {
             </div>
             <div className="account-item-action">
               <Button sx={{ fontSize: "14px", padding: "10px", backgroundColor: colors.blueAccent[500], color: colors.grey[100], }}>
-                <Link to="/update/13673712476">Update Medical Record</Link>
-              </Button>
-              <Button sx={{ fontSize: "14px", padding: "10px", backgroundColor: colors.greenAccent[500], color: colors.grey[100], }}>
-                <Link to="/records/13673712476">View Medical Record</Link>
+                <Link to={`${loaction.pathname}/123456789`}>{props.action === "update" ? "Update Medical Record" : "View Medical Record"}</Link>
               </Button>
             </div>
           </div>

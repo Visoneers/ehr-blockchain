@@ -19,17 +19,17 @@ const menuOptions = [{
 }, {
   "id": 2,
   "title": "Users",
-  "to": "/users",
+  "to": "/doctor/users",
   "icon": <ListIcon />
 }, {
   "id": 3,
   "title": "View Records",
-  "to": "/records",
+  "to": "/doctor/records",
   "icon": <UpdateIcon />
 }, {
   "id": 4,
   "title": "Update Records",
-  "to": "/update",
+  "to": "/doctor/update",
   "icon": <UpdateIcon />
 },
 ]
