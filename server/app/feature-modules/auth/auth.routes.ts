@@ -11,6 +11,7 @@ router.post(
     try {
         console.log(req.body)
         const data=req.body
+        console.log(req.headers)
         const tokenData=res.locals.user
         const result=await authService.register({data,tokenData})
         res.send(new ResponseHandler(result))
@@ -22,6 +23,7 @@ router.post(
 })
 router.post('/login', async (req: Request, res: Response, next: NextFunction) => {
     try {
+        console.log(req.body)
         const credential=req.body;
         const result=await authService.login(credential);
         res.send(new ResponseHandler(result));

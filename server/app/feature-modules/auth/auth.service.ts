@@ -16,6 +16,7 @@ const encryptPassword = async (data: string) => await hash(data, await genSalt(1
 
 const register = async (userRegisteration: FilterQuery<IUser | IDoctor>) => {
     const { data, tokenData } = userRegisteration
+    
     console.log(data, "back")
     if (data.role == process.env.ROLE_HOSPITAL_ADMIN) {
         const userExists = await hospitalService.findOne({ email: data.email })
@@ -51,36 +52,39 @@ const register = async (userRegisteration: FilterQuery<IUser | IDoctor>) => {
 }
 
 const login = async (credential: Iauth) => {
- 
+ console.log("login")
     let user: any = await userService.findOne({ email: credential.email });
     if (user) {
-        const { _id, role } = user;
+        const { _id, role} = user;
         const token = generateToken({ id: _id, role: role });
-        return { token, role: role };
+        return { token:token, id:_id,role:role,user:user };
     }
     user = await hospitalService.findOne({ email: credential.email })
+    console.log(user)
     if (user) {
-        const { _id, role } = user;
-        const token = generateToken({ id: _id, role: role });
-        return { token, role: role };
+        const { _id,role,} = user;
+        console.log(user)
+        const token = generateToken({ id: user._id, role: user.role });
+        //console.log("hospital login ",token)
+        return { token:token,id:_id,role:role,user:user};
     }
     if (user) {
         const { _id, role } = user;
         const token = generateToken({ id: _id, role: role });
-        return { token, role: role };
+        return { token:token,id:_id, role:role,user:user};
     }
     user = await societyService.findOne({ email: credential.email })
     if (user) {
         const { _id, role } = user;
         const token = generateToken({ id: _id, role: role });
-        return { token, role: role };
+        return { token:token,id:_id, role:role,user:user };
     }
 
     user = await doctorService.findOne({ email: credential.email })
     if (!user) throw authResponses.INVALID_CREDENTIAL;
-    const { _id, role } = user;
+    const { _id, role ,name,} = user;
     const token = generateToken({ id: _id, role: role });
-    return { token, role: role };
+    return { token:token,id:_id, role:role,user:user };
 }
 
 export default {

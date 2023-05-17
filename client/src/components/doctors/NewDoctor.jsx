@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Box, Grid, TextField, FormControl, FormLabel, InputLabel, RadioGroup, FormControlLabel, Radio, Button, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useTheme } from '@emotion/react';
 import { tokens } from '../../assets/theme';
 import axios from '../../api/axios';
 import useAuth from '../../hooks/useAuth';
+import AuthContext from '../../context/AuthProvider';
 
 // import { DesktopDatePicker, LocalizationProvider } from '@mui/lab';
 // import DateAdapter from '@mui/lab/AdapterMoment';
@@ -27,7 +28,6 @@ const NewDoctor = () => {
   const [matchPwd, setMatchPwd] = useState('');
   const [validMatch, setValidMatch] = useState(false);
 
-  const { auth, setAuth}=useAuth()
   useEffect(() => {
     setValidEmail(EMAIL_REGEX.test(email));
   }, [email])
@@ -71,7 +71,7 @@ const NewDoctor = () => {
       [name]: diseases
     }))
   }
-  
+  const {auth}=useContext(AuthContext)
   // const handleDateChange = (e) => {
   //   setValues({
   //     ...values,
@@ -85,14 +85,17 @@ const NewDoctor = () => {
     try {
       
       const response = await axios.post(REGISTER_URL,
-        JSON.stringify({ email, password:pwd,...values,hospitalId:"645f6c4a86f0658cf9331db6" ,name:values.fullname,role: '644e0ddae22255e5791984b9' }),
+        JSON.stringify({ email, password:pwd,...values,hospitalId:auth.id ,name:values.fullname,role: '644e0ddae22255e5791984b9' }),
         {
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+          'Accept' : 'application/json',
+          'Content-Type': 'application/json', },
           withCredentials: true
         }
       );
       // TODO: remove console.logs before deployment
       console.log(JSON.stringify(response?.data));
+      
       //clear state and controlled inputs
       setEmail('');
       setPwd('');
@@ -150,6 +153,7 @@ const NewDoctor = () => {
                   error={validPwd ? false : true}
                   margin="normal"
                 />
+                {/* <p>hello{auth}</p>/ */}
                 <p className={validPwd ? "offscreen" : "instructions"}>
                   8 to 24 characters.<br />
                   Must include uppercase and lowercase letters, a number and a special character.<br />

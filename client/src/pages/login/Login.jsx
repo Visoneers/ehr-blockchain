@@ -1,15 +1,16 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 import useAuth from '../../hooks/useAuth';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from '../../api/axios';
 
 import "./Login.scss";
+import AuthContext from '../../context/AuthProvider';
 
 const LOGIN_URL = '/auth/login';
 
 const Login = () => {
-    const { setAuth } = useAuth();
-
+    const { auth,setAuth } = useContext(AuthContext);
+// const {auth,setAuth}=useAuth()
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
@@ -31,23 +32,54 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        console.log({pass:pwd,email:user})
         try {
+            console.log("before")
+            console.log({pass:pwd,email:user})
+            console.log("after")
             const response = await axios.post(LOGIN_URL,
                 JSON.stringify({ email:user, password:pwd }),
-                {
-                    headers: { 'Content-Type': 'application/json' },
+                {   
+                    headers: {'Content-Type': 'application/json' },
                     withCredentials: true
                 }
             );
-            console.log(JSON.stringify(response?.data));
-            //console.log(JSON.stringify(response));
-            const accessToken = response?.data?.accessToken;
-            const roles = response?.data?.roles;
-            setAuth({ user, pwd, roles, accessToken });
+            console.log(JSON.stringify(response?.data)," output here");
+            
+            const accessToken = response?.data?.data.token;
+            const roles = response?.data?.data.role;
+            const id=response?.data?.data.id
+            const users=response?.data.data.user
+            
+            console.log(id,roles,accessToken,users)
+            localStorage.setItem("user_token",accessToken);
+            localStorage.setItem("user_id",id);
+            localStorage.setItem("user_role",roles);
+            setAuth({id:id,roles:roles,accessToken:accessToken,users:users});
+            //setAuth({user:user})
+            console.log(roles,"Auth")
+                console.log(process.env.ROLE_HOSPITAL_ADMIN)
+            if(roles===process.env.ROLE_SUPER_ADMIN){
+                navigate("/admin")
+            }
+            else if(roles===process.env.ROLE_SOCIETY_ADMIN){
+                navigate("/admin")
+            }
+            else if(roles==="644e0db8e22255e5791984b7"){
+                console.log("hi")
+                navigate("/hospitaladmin")
+            }
+            else if(roles===process.env.ROLE_USER){
+                navigate("/user")
+            }
+            else if(roles===process.env.ROLE_DOCTOR){
+                navigate("/doctor")
+            }
+
             setUser('');
             setPwd('');
-            navigate(from, { replace: true });
+          
+            
             
         } catch (err) {
             if (!err?.response) {

@@ -6,6 +6,7 @@ import {  IDoctor } from "./doctor.types";
 import { doctorModel } from "./doctor.schema";
 
 const create = async (data: Partial<IDoctor>) => {
+    
     const result = await doctorRepo.create(data)
     if (!result) throw DOCTOR_RESPONSE.UPDATE_FAILED
     return result

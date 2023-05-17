@@ -5,7 +5,7 @@ import { allRoutes, excludedPaths } from "./routes.data";
 
 export const registerRoutes = (app: Application) => {
     app.use(json());
-    app.use(authorize(excludedPaths));
+    // app.use(authorize(excludedPaths));
     for (let route of allRoutes) {
         app.use(route.path, (req: Request, res: Response, next: NextFunction) => {
             next()
