@@ -11,7 +11,7 @@ import Header from "../header/Header";
 import "./MDrecord.scss";
 import "./Viewrecord.scss";
 
-const MDRecord = (props) => {
+const MDRecord = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const loaction = useLocation();
@@ -48,7 +48,13 @@ const MDRecord = (props) => {
             </div>
             <div className="account-item-action">
               <Button sx={{ fontSize: "14px", padding: "10px", backgroundColor: colors.blueAccent[500], color: colors.grey[100], }}>
-                <Link to={`${loaction.pathname}/123456789`}>{props.action === "update" ? "Update Medical Record" : "View Medical Record"}</Link>
+                <Link to="prescriptions/12345212">View Prescription</Link>
+              </Button>
+              <Button sx={{ fontSize: "14px", padding: "10px", backgroundColor: colors.blueAccent[500], color: colors.grey[100], }}>
+                <Link to="addprescription/123456789">Add Prescription</Link>
+              </Button>
+              <Button sx={{ fontSize: "14px", padding: "10px", backgroundColor: colors.blueAccent[500], color: colors.grey[100], }}>
+                <Link to={`${loaction.pathname}/123456789`}>{ loaction.pathname === "/doctor/update" ? "Update Medical Record" : "View Medical Record"}</Link>
               </Button>
             </div>
           </div>

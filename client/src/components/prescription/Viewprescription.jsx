@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, Grid, Typography, useTheme } from "@mui/material";
+import { Box, Grid, Typography, useTheme } from "@mui/material";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -8,8 +8,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { styled } from '@mui/material/styles';
 
-import { tokens } from "../assets/theme";
-import Header from '../components/header/Header';
+import Header from '../header/Header';
+import { tokens } from "../../assets/theme";
 
 
 
@@ -33,17 +33,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-const Addprescription = () => {
+const Viewprescription = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
     return (
         <Box m="20px">
             <Box display="flex" justifyContent="space-between" alignItems="center">
-                <Header title="PRESCRIPTION" subtitle="Add Prescription" />
-                <Button sx={{ fontSize: "14px", padding: "10px", backgroundColor: colors.greenAccent[500], color: colors.grey[100], }}>
-                    Add
-                </Button>
+                <Header title="PRESCRIPTION" subtitle="View Prescription" />
             </Box>
 
             <Box m="20px">
@@ -155,4 +152,4 @@ const Addprescription = () => {
     )
 }
 
-export default Addprescription;
+export default Viewprescription;

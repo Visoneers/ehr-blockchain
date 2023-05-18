@@ -7,6 +7,7 @@ import { ColorModeContext, useMode } from "./assets/theme";
 import Admin from "./pages/admin/Admin";
 import HospitalAdmin from "./pages/hospitaladmin/HospitalAdmin";
 import Doctor from './pages/doctor/Doctor';
+import User from "./pages/user/User";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Missing from "./pages/missing/Missing";
@@ -19,12 +20,14 @@ import MDrecord from "./components/mdrecord/MDrecord";
 import ViewRecord from "./components/mdrecord/Viewrecord";
 import Doctors from "./components/doctors/Doctors";
 import RequireAuth from "./helpers/RequireAuth";
-import Addprescription from "./pages/AddPrescription";
+import Addprescription from "./components/prescription/AddPrescription";
 import NewUser from "./components/users/NewUser";
 import Users from "./components/users/Users";
 import Hospitals from "./components/hospitals/Hospitals";
 import NewHospitals from "./components/hospitals/NewHosptals";
 import NewDoctor from "./components/doctors/NewDoctor";
+import Prescription from "./components/prescription/Prescriptions";
+import Viewprescription from "./components/prescription/Viewprescription";
 
 const ROLES = {
   Admin: 2001,
@@ -80,7 +83,7 @@ function App() {
               <Route path="users/addnewuser" element={<NewUser />} />
               <Route path="doctors" element={<Doctors />} />
               <Route path="doctors/addnewdoctor" element={<NewDoctor />} />
-              <Route path="update" element={<MDrecord action="update"/>} />
+              <Route path="update" element={<MDrecord />} />
               <Route path="update/:userID" element={<MDupdate account={account} />} />
             </Route>
 
@@ -94,7 +97,20 @@ function App() {
               <Route path="update/:userID" element={<MDupdate account={account} />} />
               <Route path="records" element={<MDrecord />} />
               <Route path="records/:userID" element={<ViewRecord />} />
-              <Route path="addprescription" element={<Addprescription />} />
+              <Route path="update/prescriptions/:userID" element={<Prescription />} />
+              <Route path="records/prescriptions/:userID" element={<Prescription />} />
+              <Route path="update/prescriptions/:userID/:prescriptionID" element={<Viewprescription />} />
+              <Route path="records/prescriptions/:userID/:prescriptionID" element={<Viewprescription />} />
+              <Route path="update/addprescription/:userID" element={<Addprescription />} />
+              <Route path="records/addprescription/:userID" element={<Addprescription />} />
+            </Route>
+
+            {/* User Routes */}
+            <Route path="/user" element={<User />}>
+              <Route index element={<Dashboard />} />
+              <Route path="records/:userID" element={<ViewRecord />} />
+              <Route path="prescriptions" element={<Prescription />} />
+              <Route path="prescriptions/:prescriptionID" element={<Viewprescription />} />
             </Route>
 
             <Route path="login" element={<Login />} />
