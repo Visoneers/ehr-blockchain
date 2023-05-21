@@ -7,6 +7,7 @@ contract MDStorage {
     mapping(uint256 => File) public files;
 
     struct File {
+        uint256 userId;
         uint256 fileId;
         string fileHash;
         uint256 fileSize;
@@ -18,6 +19,7 @@ contract MDStorage {
     }
 
     event FileUploaded(
+        uint256 userId,
         uint256 fileId,
         string fileHash,
         uint256 fileSize,
@@ -30,7 +32,7 @@ contract MDStorage {
 
     constructor() public {}
 
-    function uploadFile(string memory _fileHash, uint256 _fileSize, string memory _fileType, string memory _fileName, string memory _fileDescription) public {
+    function uploadFile(uint256 userId, string memory _fileHash, uint256 _fileSize, string memory _fileType, string memory _fileName, string memory _fileDescription) public {
         // Make sure the file hash exists
         require(bytes(_fileHash).length > 0);
         // Make sure file type exists
@@ -50,9 +52,9 @@ contract MDStorage {
         fileCount++;
 
         // Add File to the contract
-        files[fileCount] = File(fileCount, _fileHash, _fileSize, _fileType, _fileName, _fileDescription, now, msg.sender);
+        files[fileCount] = File(userId, fileCount, _fileHash, _fileSize, _fileType, _fileName, _fileDescription, now, msg.sender);
 
         // Trigger an event
-        emit FileUploaded(fileCount, _fileHash, _fileSize, _fileType, _fileName, _fileDescription, now, msg.sender);
+        emit FileUploaded(userId, fileCount, _fileHash, _fileSize, _fileType, _fileName, _fileDescription, now, msg.sender);
     }
 }

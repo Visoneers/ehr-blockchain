@@ -29,13 +29,6 @@ import NewDoctor from "./components/doctors/NewDoctor";
 import Prescription from "./components/prescription/Prescriptions";
 import Viewprescription from "./components/prescription/Viewprescription";
 
-const ROLES = {
-  Admin: 2001,
-  HospitalAdmin: 1984,
-  Doctor: 5467,
-  User: 1240,
-};
-
 function App() {
   const [theme, colorMode] = useMode();
   const [account, setAccount] = useState("0x..");
@@ -116,9 +109,9 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
 
-            <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+            {/* <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
               <Route path="admin" element={<Admin />} />
-            </Route>
+            </Route> */}
 
             <Route path="unauthorized" element={<Unauthorized />} />
             <Route path="*" element={<Missing />} />

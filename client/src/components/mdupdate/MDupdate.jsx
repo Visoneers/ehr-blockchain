@@ -65,7 +65,7 @@ const MDupdate = ({account}) => {
       // Add file to the IPFS
       const added = await ipfs.add(file.buffer);
       console.log(added)
-      mdstorage.methods.uploadFile(added?.path, added?.size, file.type, file.name, file.description).send({ from: `${account.toString()}` }).on('transactionHash', (hash) => {
+      mdstorage.methods.uploadFile(123456789, added?.path, added?.size, file.type, file.name, file.description).send({ from: `${account.toString()}` }).on('transactionHash', (hash) => {
         window.location.reload()
       }).on('error', (e) => {
         window.alert('Error')

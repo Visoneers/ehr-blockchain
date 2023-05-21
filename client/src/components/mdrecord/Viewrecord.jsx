@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import moment from 'moment';
 import { Box, Button, IconButton, InputBase, Typography, useTheme, Grid, Paper } from "@mui/material";
 import WcIcon from '@mui/icons-material/Wc';
@@ -12,15 +12,20 @@ const Viewrecord = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
+  const {userID} = useParams()
+  const [filteredFiles, setFilteredFiles] = useState(null)
   const [files, setFiles] = useState(null);
 
   useEffect(() => {
     (async () => {
       let file = await LoadBlockchainData();
-      console.log(file);
       if(file){
         setFiles(file)
       }
+      const filtereddata = file.filter((filedata) =>
+      filedata.userId === userID
+      );
+      setFilteredFiles(filtereddata)
     })();
   },[]);
 
@@ -173,8 +178,8 @@ const Viewrecord = () => {
       <b />
       <Typography variant="h3">Medical Records</Typography>
       {
-        files ? (
-          files.map((data, index) => {
+        filteredFiles ? (
+          filteredFiles.map((data, index) => {
             return(
             <Box alignItems="Center" key={ index}>
               <Box className="account" backgroundColor={colors.primary[400]}>
