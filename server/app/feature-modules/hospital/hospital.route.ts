@@ -10,10 +10,11 @@ import { HOSPITAL_UPDATE_VALIDATOR } from './hospital.validator';
 const router = Router()
 
 router.get("/",
-    FILTER_PRODUCT_VALIDATOR,
-    validateRole([Role.ADMIN, Role.DOCTOR, Role.SOCIETY_ADMIN, Role.USER]),
+    // FILTER_PRODUCT_VALIDATOR,
+    // validateRole([Role.ADMIN, Role.DOCTOR, Role.SOCIETY_ADMIN, Role.USER]),
     async (req: Request, res: Response, next: NextFunction) => {
         try {
+            console.log("hospital route")
             const query = req.query
             const result = await hospitalService.getAllHospital(query)
             res.send(new ResponseHandler(result))
@@ -48,3 +49,5 @@ router.delete("/:id",
             next(error)
         }
     })
+
+export default router
