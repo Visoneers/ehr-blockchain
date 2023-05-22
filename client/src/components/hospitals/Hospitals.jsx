@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from '../../api/axios';
 import { Box, Button, useTheme } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import  axios from "axios"
 import { ReactComponent as AdminIcon } from '../../assets/icons/admin.svg';
 import Header from '../header/Header';
 import { tokens } from '../../assets/theme';
@@ -12,26 +12,53 @@ const Hospitals = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const [rows, setRows] = useState([]);
+  // const [rows, setRows] = useState([]);
 
-  const fetchHospitals = async () => {
-    try {
-      const response = await axios.get("http://localhost:3000/hospitals", {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true
-      });
-      console.log("hi")
-      console.log(response.data.data[0].paginetResult)
-      setRows(response.data.data[0].paginetResult);
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const fetchHospitals = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:3000/hospitals", {
+  //       headers: { 'Content-Type': 'application/json' },
+  //       withCredentials: true
+  //     });
+  //     console.log("hi")
+  //     console.log(response.data.data[0].paginetResult)
+  //     setRows(response.data.data[0].paginetResult);
+  //     console.log(response);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchHospitals();
+  // }, []);
+
+  const [ hospitals, setHospitals ] = useState();
 
   useEffect(() => {
-    fetchHospitals();
-  }, []);
+    let isMounted = true;
+    const controller = new AbortController();
+
+    const getHospitals = async () => {
+      try {
+        const response = await axios.get("/hospitals", {
+          signal: controller.signal
+        });
+        console.log(response.data);
+        isMounted && setHospitals(response.data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    getHospitals();
+    console.log(hospitals);
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+    }
+  }, [])
 
   const columns = [
     { field: "registrarId", headerName: "Registrar ID" },
@@ -125,7 +152,7 @@ const Hospitals = () => {
           }}
         >
           <DataGrid
-            rows={rows}
+            rows={hospitals}
             columns={columns}
             components={{ Toolbar: GridToolbar }}
           />
