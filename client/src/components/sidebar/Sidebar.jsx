@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../assets/theme";
@@ -35,6 +35,12 @@ const Sidebar = ({ menuOptions }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
   const { setAuth } = useContext(AuthContext)
+
+  const location = useLocation();
+  const handleLogout = () => {
+    setAuth('');
+    <Navigate to="/login" state={{ from: location }} replace />
+  }
 
   return (
     <Box
@@ -132,7 +138,7 @@ const Sidebar = ({ menuOptions }) => {
                 color: colors.grey[100],
               }}
               icon={<LogoutIcon />}
-              onClick={() => setAuth('')}
+              onClick={handleLogout}
             >
               <Typography>Logout</Typography>
             </MenuItem>
