@@ -1,18 +1,16 @@
 import React, { useRef, useState, useEffect, useContext } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from '../../context/AuthProvider';
 import axios from '../../api/axios';
+import { toast } from "react-hot-toast";
 
 import "./Login.scss";
 
 const LOGIN_URL = '/auth/login';
 
 const Login = () => {
-    const { auth, setAuth } = useContext(AuthContext);
-    // const {auth,setAuth}=useAuth()
+    const { setAuth } = useContext(AuthContext);
     const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || "/";
 
     const userRef = useRef();
     const errRef = useRef();
@@ -77,9 +75,7 @@ const Login = () => {
 
             setUser('');
             setPwd('');
-
-
-
+            toast.success("Successfully Logged In")
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
