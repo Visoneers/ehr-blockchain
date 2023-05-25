@@ -50,7 +50,7 @@ export const genratePipeline = (query: any) => {
                 totalCount: [{ $count: "totalResults" }],
                 paginetResult: [
                     { $skip: (((Number(page) - 1) || 0) * (Number(limit) || 10)) },
-                    { $limit: Number(limit) || 10 },
+                    { $limit: Number(limit) || 1000 },
                 ]
  
             }

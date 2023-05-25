@@ -12,10 +12,11 @@ const Viewrecord = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const {userID} = useParams()
+  
   const [filteredFiles, setFilteredFiles] = useState(null)
   const [files, setFiles] = useState(null);
-
+const {userID}=useParams()
+console.log(userID,"g=from view medical recodrds")
   useEffect(() => {
     (async () => {
       let file = await LoadBlockchainData();

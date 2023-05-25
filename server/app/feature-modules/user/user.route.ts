@@ -9,7 +9,7 @@ import { USER_UPDATE_VALIDATOR } from './user.validator';
 const router = Router()
 
 router.get("/",
-    FILTER_PRODUCT_VALIDATOR,
+    // FILTER_PRODUCT_VALIDATOR,
     validateRole([Role.ADMIN, Role.DOCTOR, Role.SOCIETY_ADMIN, Role.USER]),
     async (req: Request, res: Response, next: NextFunction) => {
         try {
@@ -51,13 +51,14 @@ router.delete("/:id",
 
 
 //users of particular hospital
-router.get("/hospitalUsers",
+router.get("/hospitalUsers/:hospitalId",
     //validateRole([Role.HOSPITAL_ADMIN]),
     async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const id = req.body.id
-            console.log("helo")
+            const id = req.params.hospitalId
+
             const result = await userService.getHospitalUser(id)
+            console.log(result)
             res.send(new ResponseHandler(result))
         } catch (error) {
             next(error)
@@ -67,6 +68,7 @@ router.get("/hospitalUsers",
 router.get("/allUsers",
     async (req: Request, res: Response, next: NextFunction) => {
         try {
+            console.log("all users routes")
             const result = await userService.getAllUser({})
             res.send(new ResponseHandler(result))
         } catch (error) {
@@ -78,6 +80,7 @@ router.get("getSocietyUsers",
         try {
             const societyId = req.body.id
             const result = await userService.getSocietyUsers(societyId)
+           console.log(result)
             res.send(new ResponseHandler(result))
         } catch (error) {
             next(error)

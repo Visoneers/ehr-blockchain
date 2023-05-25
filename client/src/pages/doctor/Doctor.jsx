@@ -11,7 +11,7 @@ import { ReactComponent as HomeIcon } from '../../assets/icons/home.svg';
 const menuOptions = [{
   "id": 1,
   "title": "Dashboard",
-  "to": "/",
+  "to": "/doctor",
   "icon": <HomeIcon />,
 }, {
   "id": 2,

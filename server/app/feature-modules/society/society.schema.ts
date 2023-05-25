@@ -7,6 +7,10 @@ const societySchema = new BaseSchema({
         type: String,
         required: true
     },
+    id:{
+        type:String,
+        required:true
+    },
     email: {
         type: String,
         unique: true,

@@ -102,8 +102,9 @@ function App() {
             <Route path="/user" element={<User />}>
               <Route index element={<Dashboard />} />
               <Route path="records/:userID" element={<ViewRecord />} />
-              <Route path="prescriptions" element={<Prescription />} />
-              <Route path="prescriptions/:prescriptionID" element={<Viewprescription />} />
+              {/* <Route path="prescriptions" element={<Prescription />} /> */}
+              <Route path="prescriptions/:userID" element={<Prescription />} />
+              <Route path="prescriptions/:userID/:prescriptionID" element={<Viewprescription/>}/>
             </Route>
 
             <Route path="login" element={<Login />} />

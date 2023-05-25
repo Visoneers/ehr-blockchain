@@ -9,9 +9,9 @@ router.post(
     '/register', 
     async(req, res,next) => {
     try {
-        console.log(req.body)
+        // console.log(req.body)
         const data=req.body
-        console.log(req.headers)
+        // console.log(req.headers)
         const tokenData=res.locals.user
         const result=await authService.register({data,tokenData})
         res.send(new ResponseHandler(result))

@@ -7,6 +7,10 @@ const doctorSchema=new BaseSchema({
     name:{
         type:String,
         // required:true
+    }, 
+    id:{
+        type:String,
+        required:true
     },
     email:{
         type:String,
@@ -34,7 +38,8 @@ const doctorSchema=new BaseSchema({
     mobileNo:String,
     pinCode:Number,
     gender:String,
-    address:String,fullName:String
+    address:String,
+    fullName:String
 })
 
 type doctorDocument=Document &IDoctor

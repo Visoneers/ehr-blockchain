@@ -3,16 +3,8 @@ export interface IPrescription {
     patientId: string;
     doctorId: string;
     diseases:string;
-    medicines: Medicine[];
+    data:[{name:string ,
+    type:string,
+    days:number,
+    instruction:string}]
   }
-  
-  interface Medicine {
-    name: string;
-    dosage: Dosage[];
-  }
-  
-  interface Dosage {
-    time: time;
-    amount: string;
-  }
-  type time="morning"|"afternoon"|"night"

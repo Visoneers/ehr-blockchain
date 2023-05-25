@@ -8,6 +8,10 @@ const hospitalSchema = new BaseSchema({
         type: String,
         required: true
     },
+    id:{
+        type:String,
+        required:true
+    },
     email: {
         type: String,
         required: true,
@@ -30,9 +34,6 @@ const hospitalSchema = new BaseSchema({
         type: String
     },
     city: {
-        type: String
-    },
-    state: {
         type: String
     },
     pincode: {

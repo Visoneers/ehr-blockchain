@@ -11,12 +11,13 @@ import hospitalService from "../hospital/hospital.service";
 import societyService from "../society/society.service";
 import doctorService from "../doctor/doctor.service";
 import { IDoctor } from "../doctor/doctor.types";
+import { v4 as uuidv4 } from 'uuid';
 
 const encryptPassword = async (data: string) => await hash(data, await genSalt(10))
 
 const register = async (userRegisteration: FilterQuery<IUser | IDoctor>) => {
     const { data, tokenData } = userRegisteration
-    
+    data.id=uuidv4()
     console.log(data, "back")
     if (data.role == process.env.ROLE_HOSPITAL_ADMIN) {
         const userExists = await hospitalService.findOne({ email: data.email })
@@ -38,14 +39,15 @@ const register = async (userRegisteration: FilterQuery<IUser | IDoctor>) => {
         const userExists = await doctorService.findOne({ email: data.email })
         if (userExists) throw USER_RESPONSE.ALREADY_EXISTS
         data.password = await encryptPassword(data.password)
+        console.log("Doctor",data)
         const doctor = await doctorService.create(data)
         return doctor
     }
-    if (data.role == process.env.ROLE_USER) {
+    if (data.role == process.env.ROLE_USER|| data.role==process.env.ROLE_SUPER_ADMIN) {
         const userExists = await userService.findOne({ email: data.email })
         if (userExists) throw USER_RESPONSE.ALREADY_EXISTS
         data.password = await encryptPassword(data.password)
-        console.log(data)
+        console.log(data,"user data")
         const user = await userService.create(data)
         return user
     }

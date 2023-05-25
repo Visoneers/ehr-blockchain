@@ -3,7 +3,9 @@ import { BaseSchema } from "../../utils/baseschema";
 import { IUser } from "./user.types";
 
 const userSchema = new BaseSchema({
-
+    id: {
+        type: String
+    },
     name: {
         type: String,
         required: true
@@ -26,17 +28,18 @@ const userSchema = new BaseSchema({
         type: Types.ObjectId,
         ref: "societies",
     },
-
+    mobileNo: {
+        type: Number
+    },
     hospitalId: {
         type: Types.ObjectId,
         ref: "hospitals"
     },
-    insauranceId: {
-        type: Types.ObjectId,
-        ref: "insaurances"
+    insauranceName: {
+        type: String,
     },
 
-    area: {
+    address: {
         type: String
     },
     city: {
@@ -45,10 +48,10 @@ const userSchema = new BaseSchema({
     state: {
         type: String
     },
-    pincode: {
+    pinCode: {
         type: Number
     },
-    
+
     gender: String,
     vacinated: Boolean,
     age: Number,

@@ -17,7 +17,7 @@ router.get("/",
             const query = req.query
             const data=req.body
             const result = await doctorService.getAllDoctor(query)
-            res.send(new ResponseHandler({...result,hospitalId:data.hospitalId}))
+            res.send(new ResponseHandler({...result}))
         } catch (error) {
             next(error)
         }
@@ -49,13 +49,18 @@ router.delete("/:id",
             next(error)
         }
     })
-router.get("/hospitalDoctors",
+router.get("/:hospitalId",
 async(req:Request,res:Response,next:NextFunction)=>{
 try {
-    const hospitalId=req.body.HospitalId
+
+    const hospitalId=req.params.hospitalId
+    console.log("doctos routes",hospitalId)
     const result= await doctorService.getHospitalDoctor(hospitalId)
+    console.log(result)
     res.send(new ResponseHandler(result))
 } catch (error) {
     next(error)
 }
 })
+
+export default router

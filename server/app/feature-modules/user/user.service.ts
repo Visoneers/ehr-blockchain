@@ -14,13 +14,25 @@ const create = async (data: Partial<IUser>) => {
 const getAllUser = async (filter: any) => {
     const filterPipeline = genratePipeline(filter)
     return await userRepo.find(filterPipeline)
+    return userModel.aggregate([
+        
+        {
+
+        $lookup:{
+            localField:"societyId",
+            from:"societies",
+            as:"society",
+            foreignField:"_id"
+
+
+        }
+    }])
 }
 const findOne = async (filter: Partial<IUser>) => await userModel.findOne(filter)
 
 const update = (filter: FilterQuery<IUser>, data: UpdateQuery<IUser>) => userRepo.update(filter, data)
 
 const deleteUser = (filter: FilterQuery<IUser>) => update(filter, { $set: { isDeleted: true } })
-
 
 const getHospitalUser = async (hospitalId: any) => {
     console.log(new Types.ObjectId(hospitalId))
@@ -31,11 +43,14 @@ const getHospitalUser = async (hospitalId: any) => {
             foreignField: "_id",
             as: "society"
         },
-    }, {
+    },
+     {
         $match: {
             "society.0.hospitalId": new Types.ObjectId(hospitalId)
         }
-    }]
+    }
+]
+   
     return await userModel.aggregate(hospitalUserPipeline)
 }
 
@@ -61,7 +76,16 @@ const getAllUsers = async () => {
     return await userModel.find({})
 }
 const userProfile=async(userId:any)=>{
-    userModel.aggregate([{$match:new Types.ObjectId(userId)}])
+    userModel.aggregate([
+        {$match:new Types.ObjectId(userId)},
+        {$lookup:{
+            from:"societies",
+            localField:"societyId",
+            foreignField:"_id",
+            as:"society"
+        }}
+    
+    ])
 }
 export default {
     create, getAllUser, update, deleteUser, findOne, getHospitalUser, getAllUsers,

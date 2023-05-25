@@ -11,7 +11,8 @@ import { ReactComponent as HomeIcon } from '../../assets/icons/home.svg';
 
 const User = () => {
     const { auth } = useContext(AuthContext);
-
+    const userId=localStorage.getItem("user_id")
+    console.log(userId,"userId from user page")
     const menuOptions = [{
         "id": 1,
         "title": "Dashboard",
@@ -21,12 +22,12 @@ const User = () => {
         "id": 2,
         "title": "View Records",
         // "to": `/user/records/${auth?.id}`,
-        "to": `/user/records/123456789`,
+        "to": `/user/records/${userId}`,
         "icon": <ListIcon />
     }, {
         "id": 3,
         "title": "View Prescriptions",
-        "to": `/user/prescriptions/`,
+        "to": `/user/prescriptions/${userId}`,
         "icon": <ListIcon />
     },
     ]

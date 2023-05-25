@@ -1,22 +1,26 @@
-import mongoose from "mongoose";
+import mongoose, { Types } from "mongoose";
 import { BaseSchema } from "../../utils/baseschema";
 
-
-const DosageSchema = new mongoose.Schema({
-  time: String,
-  amount: String
-});
-
-const MedicineSchema = new mongoose.Schema({
-  name: String,
-  dosage: [DosageSchema]
-});
-
 const PrescriptionSchema = new BaseSchema({
-  patientId: String,
-  doctorId: String,
-  diseases:String,
-  medicines: [MedicineSchema],
+  userId: {
+    type: Types.ObjectId,
+    
+  },
+  doctorId: {
+    type: Types.ObjectId,
+    
+  },
+  diseases: String,
+  data: [
+    new mongoose.Schema(
+      {
+        name: String,
+        type: String,
+        days: Number,
+        instruction: String
+      }
+    )
+  ],
 });
 
 export const PrescriptionModel = mongoose.model('Prescription', PrescriptionSchema);

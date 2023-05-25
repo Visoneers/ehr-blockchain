@@ -23,14 +23,16 @@ const update = (filter: FilterQuery<IDoctor>, data: UpdateQuery<IDoctor>) => doc
 const deleteUser = (filter: FilterQuery<IDoctor>) => update(filter, { $set: { isDeleted: true } })
 
 const getHospitalDoctor = async (hospitalId: any) => {
-    const hospitalDoctprPipeline :any= [
-        {
-            match: {
-                hospitalId: new Types.ObjectId(hospitalId)
-            }
+    console.log(hospitalId)
+    // const hospitalDoctprPipeline :any= [
+        
+    // ]
+    const doctors=await doctorModel.aggregate([{
+        $match: {
+            hospitalId: new Types.ObjectId(hospitalId)
         }
-    ]
-    return await doctorModel.aggregate(hospitalDoctprPipeline)
+    }])
+    return doctors
 }
 export default {
     create, getAllDoctor, update, deleteUser, findOne,getHospitalDoctor

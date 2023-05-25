@@ -7,9 +7,7 @@ import IndiaIcon from '../../assets/images/india.png';
 import Header from "../header/Header";
 import LineChart from "./LineChart";
 import GeographyChart from "./GeographyChart";
-import BarChart from "./BarChart";
 import StatBox from "./StatBox";
-import ProgressCircle from "./ProgressCircle";
 
 const headCells = [
   { id: "first_name", label: "Name", align: "" },
@@ -96,6 +94,23 @@ const Dashboard = () => {
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
+          padding="30px"
+        >
+          <Typography
+            variant="h5"
+            fontWeight="600"
+            sx={{ marginBottom: "15px" }}
+          >
+            Geography Based Covid Cases
+          </Typography>
+          <Box height="200px">
+            <GeographyChart isDashboard={true} />
+          </Box>
+        </Box>
+        {/* <Box
+          gridColumn="span 4"
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
           overflow="auto"
         >
           <Box
@@ -134,7 +149,7 @@ const Dashboard = () => {
               ))}
             </TableBody>
           </Table>
-        </Box>
+        </Box> */}
 
         <Box
           gridColumn="span 8"
@@ -170,36 +185,59 @@ const Dashboard = () => {
           </Box>
         </Box>
 
-        {/* ROW 3 */}
         <Box
-          gridColumn="span 4"
-          gridRow="span 2"
+          gridColumn="span 2"
           backgroundColor={colors.primary[400]}
-          p="30px"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
         >
-          
+    
         </Box>
-
-        <Box gridColumn="span 4" gridRow="span 2" backgroundColor={colors.primary[400]}>
-
-        </Box>
-
         <Box
-          gridColumn="span 4"
-          gridRow="span 2"
+          gridColumn="span 2"
           backgroundColor={colors.primary[400]}
-          padding="30px"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
         >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ marginBottom: "15px" }}
-          >
-            Geography Based Covid Cases
-          </Typography>
-          <Box height="200px">
-            <GeographyChart isDashboard={true} />
-          </Box>
+    
+        </Box>
+        <Box
+          gridColumn="span 2"
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+    
+        </Box>
+        <Box
+          gridColumn="span 2"
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+    
+        </Box>
+        <Box
+          gridColumn="span 2"
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+    
+        </Box>
+        <Box
+          gridColumn="span 2"
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+    
         </Box>
       </Box>
     </Box>

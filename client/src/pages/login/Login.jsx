@@ -33,9 +33,9 @@ const Login = () => {
         e.preventDefault();
         console.log({ pass: pwd, email: user })
         try {
-            console.log("before")
-            console.log({ pass: pwd, email: user })
-            console.log("after")
+            // console.log("before")
+            // console.log({ pass: pwd, email: user })
+            // console.log("after")
             const response = await axios.post(LOGIN_URL,
                 JSON.stringify({ email: user, password: pwd }),
                 {
@@ -57,21 +57,21 @@ const Login = () => {
             setAuth({ id: id, roles: roles, accessToken: accessToken, users: users });
             //setAuth({user:user})
             console.log(roles, "Auth")
-            console.log(process.env.ROLE_HOSPITAL_ADMIN)
-            if (roles === process.env.ROLE_SUPER_ADMIN) {
+            // console.log(process.env.ROLE_HOSPITAL_ADMIN)
+            if (roles === "644e0d8ae22255e5791984b5") {
                 navigate("/admin")
             }
-            else if (roles === process.env.ROLE_SOCIETY_ADMIN) {
+            else if (roles ==="644e0da2e22255e5791984b6" ) {
                 navigate("/admin")
             }
             else if (roles === "644e0db8e22255e5791984b7") {
                 console.log("hi")
                 navigate("/hospitaladmin")
             }
-            else if (roles === process.env.ROLE_USER) {
+            else if (roles === "644e0dc7e22255e5791984b8") {
                 navigate("/user")
             }
-            else if (roles === process.env.ROLE_DOCTOR) {
+            else if (roles === "644e0ddae22255e5791984b9") {
                 navigate("/doctor")
             }
 

@@ -3,13 +3,15 @@ import { Box, Grid, TextField, Button, InputLabel, IconButton } from '@mui/mater
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useTheme } from '@emotion/react';
 import { tokens } from '../../assets/theme';
-import axios from '../../api/axios';
+import axios from 'axios'
+import { useParams } from 'react-router-dom';
 
 
 
 const AddPrescription = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const {userID}=useParams()
 
   const medicinesTemplate = { name: "", type: "", days: "", instruction: ""}
 
@@ -36,6 +38,7 @@ const AddPrescription = () => {
     console.log(upadteMedicines);
     setMedicines(upadteMedicines)
   }
+  console.log(medicines)
 
   const deleteMultiInput = (index) => {
     const filteredmed = [...medicines]
@@ -50,16 +53,19 @@ const AddPrescription = () => {
   const handleSubmit = async (event) => {
     event.preventDefault()
 
+    console.log(values,"values")
     try {
-      const response = await axios.post("",
-        JSON.stringify({ ...values }),
+      console.log(userID)
+      const doctorId=localStorage.getItem("user_id")
+      const response = await axios.post(`http://localhost:3000/prescription/${userID}`,
+        JSON.stringify({ ...values,data:medicines,doctorId }),
         {
           headers: { 'Content-Type': 'application/json' },
           withCredentials: true
         }
       );
       // TODO: remove console.logs before deployment
-      console.log(JSON.stringify(response?.data));
+      console.log(JSON.stringify(response?.data),"response");
       //clear state and controlled inputs
       setValues(initialFValues);
     } catch (err) {
