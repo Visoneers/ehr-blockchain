@@ -83,7 +83,7 @@ const NewDoctor = () => {
     event.preventDefault()
 
     try {
-      
+      console.log(auth.id)
       const response = await axios.post(REGISTER_URL,
         JSON.stringify({ email, password:pwd,...values,hospitalId:auth.id ,name:values.fullname,role: '644e0ddae22255e5791984b9' }),
         {

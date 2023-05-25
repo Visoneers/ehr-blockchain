@@ -2,15 +2,13 @@ export interface ISociety{
     _id?:string,
     name:string,
     adminId:string,
-    address:IAddress,
     email:string,
     contact:number,
-    password:string
-}
-
-export interface IAddress{
+    password:string,
     area:string,
     city:string,
     state:string,
     pincode:number
+    
 }
+

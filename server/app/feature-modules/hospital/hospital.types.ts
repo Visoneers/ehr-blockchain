@@ -1,4 +1,4 @@
-import { IAddress } from "../society/society.types";
+
 
 export interface IHospital{
     _id?:string,
@@ -7,6 +7,10 @@ export interface IHospital{
     password:string,
     role:string,
     societId:string,
-    address:IAddress,
+    area:String,
+    city:string,
+    state:string,
+    pincode:string,
+    address:string
     contact:number
 }

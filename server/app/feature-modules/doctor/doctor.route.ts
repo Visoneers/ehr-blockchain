@@ -15,8 +15,9 @@ router.get("/",
     async (req: Request, res: Response, next: NextFunction) => {
         try {
             const query = req.query
-            const result = await doctorService.getAllUser(query)
-            res.send(new ResponseHandler(result))
+            const data=req.body
+            const result = await doctorService.getAllDoctor(query)
+            res.send(new ResponseHandler({...result,hospitalId:data.hospitalId}))
         } catch (error) {
             next(error)
         }
@@ -48,3 +49,13 @@ router.delete("/:id",
             next(error)
         }
     })
+router.get("/hospitalDoctors",
+async(req:Request,res:Response,next:NextFunction)=>{
+try {
+    const hospitalId=req.body.HospitalId
+    const result= await doctorService.getHospitalDoctor(hospitalId)
+    res.send(new ResponseHandler(result))
+} catch (error) {
+    next(error)
+}
+})

@@ -26,6 +26,15 @@ const doctorSchema=new BaseSchema({
         type:Types.ObjectId,
         ref:"hospitals"
     },
+    age:{
+        type:Number
+    },
+    specialists:[String],
+    city:String,
+    mobileNo:String,
+    pinCode:Number,
+    gender:String,
+    address:String,fullName:String
 })
 
 type doctorDocument=Document &IDoctor
