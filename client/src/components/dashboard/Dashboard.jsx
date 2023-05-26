@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Typography, useTheme, Table, TableBody, TableHead, TableCell, TableRow, Button } from "@mui/material";
 import { tokens } from "../../assets/theme";
 import { mockAppointments } from "../../assets/data/mockData";
@@ -8,6 +8,8 @@ import Header from "../header/Header";
 import LineChart from "./LineChart";
 import GeographyChart from "./GeographyChart";
 import StatBox from "./StatBox";
+import axios from 'axios';
+import Prescription from '../prescription/Prescriptions';
 
 const headCells = [
   { id: "first_name", label: "Name", align: "" },
@@ -19,7 +21,43 @@ const headCells = [
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
+  const userId=localStorage.getItem("user_id")
+  const userRole=localStorage.getItem("user_role")
+  const [toPrescriptionDiseases,setTopPrescritionDiseases]=useState()
+  useEffect(() => {
+    let isMounted = true;
+    const controller = new AbortController();
+  
+    const fetchPrescription = async () => {
+      try {
+        console.log(userId);
+        const response = await axios.get(
+          `http://localhost:3000/prescription/topDieases/${userId}}/${userRole}`,
+       
+          {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+            
+          }
+        );
+        console.log("set prescription");
+        console.log(response.data.data,"user data");
+        setTopPrescritionDiseases(response.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  
+    // useEffect(() => {
+    fetchPrescription();
+    // }, []);
+  
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
+  }, []);
+  console.log(toPrescriptionDiseases,"presss")
   return (
     <Box m="20px">
       {/* HEADER */}
@@ -41,6 +79,7 @@ const Dashboard = () => {
           display="flex"
           alignItems="center"
           justifyContent="center"
+          // subtitle={toPrescriptionDiseases[0]._id}
         >
 
         </Box>

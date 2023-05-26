@@ -1,10 +1,24 @@
+import { Role } from './../../utils/constant';
+import { roleModel } from './../role/role.schema';
 
 import { Router } from "express";
 import prescritionService from "./prescrition.service";
 import { Result } from "express-validator";
+import { ResponseHandler } from '../../utils/response.handler';
 
 const router = Router()
-
+router.get("/topDieases/:id/:role",
+    async (req, res, next) => {
+        try {
+            console.log("hello")
+            const role=req.params.role
+            const user=req.params.id
+            const result=await prescritionService.getTopDieases(role,user)
+            res.send(new ResponseHandler(result))
+        } catch (error) {
+            next(error)
+        }
+    })
 router.post("/:userId",
     async (req, res, next) => {
         try {
@@ -39,4 +53,5 @@ router.get("/:userId/:prescriptionId",
             next(error)
         }
     })
+
 export default router

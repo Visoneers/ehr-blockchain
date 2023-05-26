@@ -13,20 +13,20 @@ const create = async (data: Partial<IUser>) => {
 
 const getAllUser = async (filter: any) => {
     const filterPipeline = genratePipeline(filter)
-    return await userRepo.find(filterPipeline)
+    // return await userRepo.find(filterPipeline)
     return userModel.aggregate([
-        
+
         {
 
-        $lookup:{
-            localField:"societyId",
-            from:"societies",
-            as:"society",
-            foreignField:"_id"
+            $lookup: {
+                localField: "societyId",
+                from: "societies",
+                as: "society",
+                foreignField: "_id"
 
 
-        }
-    }])
+            }
+        }])
 }
 const findOne = async (filter: Partial<IUser>) => await userModel.findOne(filter)
 
@@ -44,13 +44,13 @@ const getHospitalUser = async (hospitalId: any) => {
             as: "society"
         },
     },
-     {
+    {
         $match: {
             "society.0.hospitalId": new Types.ObjectId(hospitalId)
         }
     }
-]
-   
+    ]
+
     return await userModel.aggregate(hospitalUserPipeline)
 }
 
@@ -60,7 +60,7 @@ const getSocietyUsers = async (societyId: any) => {
             $match: {
                 "society.0.hospitalId": new Types.ObjectId(societyId)
             }
-        },{
+        }, {
             $lookup: {
                 from: "societies",
                 localField: "societyId",
@@ -69,25 +69,37 @@ const getSocietyUsers = async (societyId: any) => {
             }
         }
     ]
-return await userModel.aggregate(societyUserPipeline)
+    return await userModel.aggregate(societyUserPipeline)
 }
 
 const getAllUsers = async () => {
     return await userModel.find({})
 }
-const userProfile=async(userId:any)=>{
-    userModel.aggregate([
-        {$match:new Types.ObjectId(userId)},
-        {$lookup:{
-            from:"societies",
-            localField:"societyId",
-            foreignField:"_id",
-            as:"society"
-        }}
-    
+const userProfile = async (userId: any) => {
+    console.log(new Types.ObjectId(userId))
+    return await userModel.aggregate([
+        { $match: { "_id": new Types.ObjectId(userId) } },
+        {
+            $lookup: {
+                from: "societies",
+                localField: "societyId",
+                foreignField: "_id",
+                as: "society"
+            }
+        },
+        { $unwind: "$society" },
+        {
+            $lookup: {
+                from: "hospitals",
+                localField: "society.hospitalId",
+                foreignField: "_id",
+                as: "hospital"
+            }
+        }
+
     ])
 }
 export default {
     create, getAllUser, update, deleteUser, findOne, getHospitalUser, getAllUsers,
-    getSocietyUsers,userProfile
+    getSocietyUsers, userProfile
 }

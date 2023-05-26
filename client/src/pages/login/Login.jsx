@@ -49,11 +49,13 @@ const Login = () => {
             const roles = response?.data?.data.role;
             const id = response?.data?.data.id
             const users = response?.data.data.user
+            const name=response?.data.data.user.name
 
             console.log(id, roles, accessToken, users)
             localStorage.setItem("user_token", accessToken);
             localStorage.setItem("user_id", id);
             localStorage.setItem("user_role", roles);
+            localStorage.setItem("user_name",name)
             setAuth({ id: id, roles: roles, accessToken: accessToken, users: users });
             //setAuth({user:user})
             console.log(roles, "Auth")

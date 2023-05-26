@@ -48,7 +48,7 @@ const NewHospital = () => {
 
     try {
       const response = await axios.post(REGISTER_URL,
-        JSON.stringify({ email, password:pwd, ...values,role:"644e0db8e22255e5791984b7" }),
+        JSON.stringify({ email, password:pwd, ...values,pincode:values.pinCode,role:"644e0db8e22255e5791984b7" }),
         {
           headers: { 'Content-Type': 'application/json' },
           withCredentials: true

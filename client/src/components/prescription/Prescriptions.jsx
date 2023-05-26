@@ -81,7 +81,10 @@ const Prescription = () => {
                       }}
                     >
                       <Typography variant="h3" color={colors.grey[100]}>
-                        {prescription.doctor[0].fullName}
+                      {prescription.doctor && prescription.doctor[0] && prescription.doctor[0].fullName}
+                      </Typography>
+                      <Typography variant="h5" color={colors.grey[100]}>
+                      {prescription.diseases}
                       </Typography>
                       <Typography variant="h5" color={colors.greenAccent[300]}>
                         {formatDate(prescription.createdAt)}

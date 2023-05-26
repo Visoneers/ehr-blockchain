@@ -7,16 +7,49 @@ import WcIcon from '@mui/icons-material/Wc';
 import { ImageConfig } from "../../assets/images/imageConfig";
 import { LoadBlockchainData } from "../../api/web3";
 import { tokens } from "../../assets/theme";
+import axios from 'axios';
 
 const Viewrecord = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  
+  const [profile,setProfile]=useState()
   const [filteredFiles, setFilteredFiles] = useState(null)
   const [files, setFiles] = useState(null);
 const {userID}=useParams()
 console.log(userID,"g=from view medical recodrds")
+
+useEffect(() => {
+  let isMounted = true;
+  const controller = new AbortController();
+
+  const fetchPrescription = async () => {
+    try {
+      console.log(userID);
+      const response = await axios.get(
+        `http://localhost:3000/users/${userID}`,
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true
+        }
+      );
+      console.log("set prescription");
+      console.log(response.data.data[0],"user data");
+      setProfile(response.data.data[0]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // useEffect(() => {
+  fetchPrescription();
+  // }, []);
+
+  return () => {
+    isMounted = false;
+    controller.abort();
+  };
+}, []);
   useEffect(() => {
     (async () => {
       let file = await LoadBlockchainData();
@@ -29,14 +62,14 @@ console.log(userID,"g=from view medical recodrds")
       setFilteredFiles(filtereddata)
     })();
   },[]);
-
+  console.log(profile,"user profile")
   return (
     <Box m="20px">
-      <Box mb="20px" sx={{ border: '1px solid grey', padding:"20px", borderRadius: "8px"}}>
+      {profile? <Box mb="20px" sx={{ border: '1px solid grey', padding:"20px", borderRadius: "8px"}}>
         <Grid container border='none'>
           <Grid item lg={12} xs={12}>
             <div className="head">
-              <h1>Prasun Bhunia</h1>
+              <h1>{profile.name}</h1>
               <div className="head-details">
                 <Paper className="detail-card" elevation={0} square>
                   <p id='border'>22</p>
@@ -174,7 +207,7 @@ console.log(userID,"g=from view medical recodrds")
             </Grid>
           </Grid>
         </Grid>
-      </Box>
+      </Box>:null}
       
       <b />
       <Typography variant="h3">Medical Records</Typography>

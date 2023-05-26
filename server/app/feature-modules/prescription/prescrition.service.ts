@@ -54,13 +54,74 @@ const getUserPrescritions = async (UserId: any) => {
         }, {
             $lookup: {
                 from: "doctors",
-                localField:"doctorId",
-                foreignField:"_id",
-                as:"doctor"
+                localField: "doctorId",
+                foreignField: "_id",
+                as: "doctor"
             }
         }])
     return prescription
 }
+
+
+const getTopDieases = (role: any, userId: any) => {
+    console.log(role,userId)
+    let userPipeline: any = [
+        {
+            $lookup: {
+                from: "users",
+                as: "user",
+                foreignField: "_id",
+                localField: "userId"
+            }
+        }
+    ]
+    if (role == process.env.ROLE_SOCIETY_ADMIN || role == process.env.ROLE_USER) {
+        console.log("society to dieases", userId)
+        userPipeline.push(
+            {
+                $match: {
+                    "user.societyId": new Types.ObjectId(userId)
+                }
+            }
+        )
+    }
+    if (role == process.env.ROLE_HOSPITAL_ADMIN) {
+        console.log("hospiatl top dieases")
+        const hospitalUser = [
+            {
+                $unwind: "$user"
+            }, {
+                $lookup: {
+                    from: "societies",
+                    foreignField: "_id",
+                    localField: "user.societyId",
+                    as: "society"
+                }
+            },
+            { $unwind: "$society" },
+            {
+                $match: { "society.hospitalId": new Types.ObjectId(userId) }
+            }
+        ]
+        userPipeline = [...userPipeline, ...hospitalUser]
+    }
+ 
+    const topDieasesPipeline = [
+        {
+            $group: {
+                _id: "$diseases",
+                count: { $sum: 1 }
+            }
+        }, {
+            $sort: {
+                count: -1
+            }
+        }, {
+            $limit: 6
+        }
+    ]
+    return PrescriptionModel.aggregate([...userPipeline, ...topDieasesPipeline])
+}
 export default {
-    create, update, deletePrescription, findOne, getUserPrescritions
+    create, update, deletePrescription, findOne, getUserPrescritions, getTopDieases
 }

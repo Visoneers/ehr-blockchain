@@ -37,8 +37,8 @@ const Users = () => {
             withCredentials: true
           });
           console.log("hi")
-          console.log(response.data.data[0].paginetResult)
-          setUsers(response.data.data[0].paginetResult);
+          console.log(response.data.data)
+          setUsers(response.data.data);
         }
         //society admin
         if (role == "644e0da2e22255e5791984b6") {
@@ -115,10 +115,14 @@ console.log(users)
       flex: 1,
     },
     {
-      feild:"society[0].name",
-      headerName:"Society",
-      allign:"left",
-      type:"string"
+      field: "society",
+      headerName: "Society",
+      align: "left",
+      type: "string",
+      valueGetter: (params) => {
+        const societyName = params.row.society[0]?.name || "";
+        return societyName;
+      },
     },
     {
       field: "address",

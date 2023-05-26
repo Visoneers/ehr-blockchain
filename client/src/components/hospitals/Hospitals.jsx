@@ -102,7 +102,7 @@ console.log(rows)
       flex: 1,
     },
     {
-      field: "pinCode",
+      field: "pincode",
       headerName: "Zip Code",
       flex: 1,
     },

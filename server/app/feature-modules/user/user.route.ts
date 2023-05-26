@@ -75,7 +75,7 @@ router.get("/allUsers",
             next(error)
         }
     })
-router.get("getSocietyUsers",
+router.get("/getSocietyUsers",
     async (req: Request, res: Response, next: NextFunction) => {
         try {
             const societyId = req.body.id
@@ -87,10 +87,12 @@ router.get("getSocietyUsers",
         }
     })
 
-router.get("/userProfile",
+router.get("/:userId",
 async(req:Request,res:Response,next:NextFunction)=>{
     try {
-        const userId=req.body.userId
+       
+        const userId=req.params.userId
+        console.log(userId)
         const result= await userService.userProfile(userId)
         res.send(new ResponseHandler(result))
     } catch (error) {
