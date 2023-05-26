@@ -57,63 +57,65 @@ function App() {
           <Route path="/" element={<Layout />}>
 
             {/* Admin Routes */}
-            <Route path="/admin" element={<Admin />}>
-              <Route index element={<Dashboard />} />
-              <Route path="users" element={<Users />} />
-              <Route path="users/addnewuser" element={<NewUser />} />
-              <Route path="hospitals" element={<Hospitals />} />
-              <Route path="hospitals/addnewhospital" element={<NewHospitals />} />
-              <Route path="update" element={<MDrecord action="update" />} />
-              <Route path="update/:userID" element={<MDupdate account={account} />} />
-              <Route path="records" element={<MDrecord action="records" />} />
-              <Route path="records/:userID" element={<ViewRecord />} />
+            <Route element={<RequireAuth allowedRole="644e0d8ae22255e5791984b5" />}>
+              <Route path="/admin" element={<Admin />}>
+                <Route index element={<Dashboard />} />
+                <Route path="users" element={<Users />} />
+                <Route path="users/addnewuser" element={<NewUser />} />
+                <Route path="hospitals" element={<Hospitals />} />
+                <Route path="hospitals/addnewhospital" element={<NewHospitals />} />
+                <Route path="update" element={<MDrecord action="update" />} />
+                <Route path="update/:userID" element={<MDupdate account={account} />} />
+                <Route path="records" element={<MDrecord action="records" />} />
+                <Route path="records/:userID" element={<ViewRecord />} />
+              </Route>
             </Route>
 
             {/* Hospital Admin */}
-            <Route path="/hospitaladmin" element={<HospitalAdmin />}>
-              <Route index element={<Dashboard />} />
-              <Route path="users" element={<Users />} />
-              <Route path="users/addnewuser" element={<NewUser />} />
-              <Route path="doctors" element={<Doctors />} />
-              <Route path="doctors/addnewdoctor" element={<NewDoctor />} />
-              <Route path="update" element={<MDrecord />} />
-              <Route path="update/:userID" element={<MDupdate account={account} />} />
+            <Route element={<RequireAuth allowedRole="644e0db8e22255e5791984b7" />}>
+              <Route path="/hospitaladmin" element={<HospitalAdmin />}>
+                <Route index element={<Dashboard />} />
+                <Route path="users" element={<Users />} />
+                <Route path="users/addnewuser" element={<NewUser />} />
+                <Route path="doctors" element={<Doctors />} />
+                <Route path="doctors/addnewdoctor" element={<NewDoctor />} />
+                <Route path="update" element={<MDrecord />} />
+                <Route path="update/:userID" element={<MDupdate account={account} />} />
+              </Route>
             </Route>
 
 
             {/* Doctor Routes */}
-            <Route path="/doctor" element={<Doctor />}>
-              <Route index element={<Dashboard />} />
-              <Route path="users" element={<Users />} />
-              <Route path="users/addnewuser" element={<NewUser />} />
-              <Route path="update" element={<MDrecord />} />
-              <Route path="update/:userID" element={<MDupdate account={account} />} />
-              <Route path="records" element={<MDrecord />} />
-              <Route path="records/:userID" element={<ViewRecord />} />
-              <Route path="update/prescriptions/:userID" element={<Prescription />} />
-              <Route path="records/prescriptions/:userID" element={<Prescription />} />
-              <Route path="update/prescriptions/:userID/:prescriptionID" element={<Viewprescription />} />
-              <Route path="records/prescriptions/:userID/:prescriptionID" element={<Viewprescription />} />
-              <Route path="update/addprescription/:userID" element={<Addprescription />} />
-              <Route path="records/addprescription/:userID" element={<Addprescription />} />
+            <Route element={<RequireAuth allowedRole="644e0ddae22255e5791984b9"/>}>
+              <Route path="doctor" element={<Doctor />}>
+                <Route index element={<Dashboard />} />
+                <Route path="users" element={<Users />} />
+                <Route path="users/addnewuser" element={<NewUser />} />
+                <Route path="update" element={<MDrecord />} />
+                <Route path="update/:userID" element={<MDupdate account={account} />} />
+                <Route path="records" element={<MDrecord />} />
+                <Route path="records/:userID" element={<ViewRecord />} />
+                <Route path="update/prescriptions/:userID" element={<Prescription />} />
+                <Route path="records/prescriptions/:userID" element={<Prescription />} />
+                <Route path="update/prescriptions/:userID/:prescriptionID" element={<Viewprescription />} />
+                <Route path="records/prescriptions/:userID/:prescriptionID" element={<Viewprescription />} />
+                <Route path="update/addprescription/:userID" element={<Addprescription />} />
+                <Route path="records/addprescription/:userID" element={<Addprescription />} />
+              </Route>
             </Route>
 
             {/* User Routes */}
-            <Route path="/user" element={<User />}>
-              <Route index element={<Dashboard />} />
-              <Route path="records/:userID" element={<ViewRecord />} />
-              {/* <Route path="prescriptions" element={<Prescription />} /> */}
-              <Route path="prescriptions/:userID" element={<Prescription />} />
-              <Route path="prescriptions/:userID/:prescriptionID" element={<Viewprescription/>}/>
+            <Route element={<RequireAuth allowedRole="644e0ddae22255e5791984b9" />}>
+              <Route path="/user" element={<User />}>
+                <Route index element={<Dashboard />} />
+                <Route path="records/:userID" element={<ViewRecord />} />
+                <Route path="prescriptions/:userID" element={<Prescription />} />
+                <Route path="prescriptions/:userID/:prescriptionID" element={<Viewprescription />} />
+              </Route>
             </Route>
 
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
-
-            {/* <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
-              <Route path="admin" element={<Admin />} />
-            </Route> */}
-
             <Route path="unauthorized" element={<Unauthorized />} />
             <Route path="*" element={<Missing />} />
           </Route>

@@ -1,20 +1,23 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../assets/theme";
+import AuthContext from "../../context/AuthProvider";
+
+import LogoutIcon from '@mui/icons-material/Logout';
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import StorageIcon from "@mui/icons-material/Storage";
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
 import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 
 import "react-pro-sidebar/dist/css/styles.css";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
 
 
   return (
@@ -48,6 +51,14 @@ const Sidebar = ({ menuOptions }) => {
     if (role == "644e0dc7e22255e5791984b8") return "User";
     if ((role = "644e0ddae22255e5791984b9")) return "Doctor";
   };
+  const { setAuth } = useContext(AuthContext)
+
+  const location = useLocation();
+  const handleLogout = () => {
+    setAuth('');
+    <Navigate to="/login" state={{ from: location }} replace />
+  }
+
   return (
     <Box
       sx={{
@@ -133,6 +144,15 @@ const Sidebar = ({ menuOptions }) => {
                 />
               );
             })}
+            <MenuItem
+              style={{
+                color: colors.grey[100],
+              }}
+              icon={<LogoutIcon />}
+              onClick={handleLogout}
+            >
+              <Typography>Logout</Typography>
+            </MenuItem>
           </Box>
         </Menu>
       </ProSidebar>
