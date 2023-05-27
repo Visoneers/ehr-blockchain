@@ -17,7 +17,7 @@ const Users = () => {
   const colors = tokens(theme.palette.mode);
   const navigate = useNavigate();
   const location = useLocation();
-  const [users, setUsers] = useState();
+  const [users, setUsers] = useState([]);
   const { auth } = useContext(AuthContext)
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const Users = () => {
         const role=localStorage.getItem("user_role")
         const id=localStorage.getItem("user_id")
         // console.log(role ,"local strogar")
-        if (role == "644e0d8ae22255e5791984b5" ||role=="644e0ddae22255e5791984b9") {
+        if (role === "644e0d8ae22255e5791984b5" ||role=="644e0ddae22255e5791984b9") {
           const response = await axios.get("http://localhost:3000/users/allUsers", {
             headers: { 'Content-Type': 'application/json' },
             withCredentials: true
@@ -41,7 +41,7 @@ const Users = () => {
           setUsers(response.data.data[0].paginetResult);
         }
         //society admin
-        if (role == "644e0da2e22255e5791984b6") {
+        if (role === "644e0da2e22255e5791984b6") {
           const response = await axios.get("http://localhost:3000/users/getSocietyUsers", {
             headers: { 'Content-Type': 'application/json' },
             withCredentials: true
@@ -51,7 +51,7 @@ const Users = () => {
           setUsers(response.data.data[0].paginetResult);
         }
         //hospitaladmin doctor
-        if (role == "644e0db8e22255e5791984b7") {
+        if (role === "644e0db8e22255e5791984b7") {
           console.log(auth.id)
           console.log("hospiyal user req routes")
           const response = await axios.get(`http://localhost:3000/users/hospitalUsers/${id}`, {

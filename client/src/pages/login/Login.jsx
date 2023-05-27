@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import AuthContext from '../../context/AuthProvider';
 import axios from '../../api/axios';
 import { toast } from "react-hot-toast";
@@ -11,6 +11,7 @@ const LOGIN_URL = '/auth/login';
 const Login = () => {
     const { setAuth } = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
 
     const userRef = useRef();
     const errRef = useRef();
@@ -18,6 +19,7 @@ const Login = () => {
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
+    const [role, setRole] = useState('');
 
     useEffect(() => {
         userRef.current.focus();
@@ -45,9 +47,9 @@ const Login = () => {
 
             const accessToken = response?.data?.data.token;
             const roles = response?.data?.data.role;
-            const id = response?.data?.data.id
-            const users = response?.data.data.user
-
+            const id = response?.data?.data.id;
+            const users = response?.data.data.user;
+            setRole(roles)
             console.log(id, roles, accessToken, users)
             localStorage.setItem("user_token", accessToken);
             localStorage.setItem("user_id", id);
@@ -55,27 +57,11 @@ const Login = () => {
             setAuth({ id: id, roles: roles, accessToken: accessToken, users: users });
             //setAuth({user:user})
             console.log(roles, "Auth")
-            // console.log(process.env.ROLE_HOSPITAL_ADMIN)
-            if (roles === "644e0d8ae22255e5791984b5") {
-                navigate("/admin")
-            }
-            else if (roles ==="644e0da2e22255e5791984b6" ) {
-                navigate("/admin")
-            }
-            else if (roles === "644e0db8e22255e5791984b7") {
-                console.log("hi")
-                navigate("/hospitaladmin")
-            }
-            else if (roles === "644e0dc7e22255e5791984b8") {
-                navigate("/user")
-            }
-            else if (roles === "644e0ddae22255e5791984b9") {
-                navigate("/doctor")
-            }
-
+            // console.log(process.env.ROLE_HOSPITAL_ADMIN) 
+             
+            toast.success("Successfully Logged In")
             setUser('');
             setPwd('');
-            toast.success("Successfully Logged In")
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
@@ -89,6 +75,26 @@ const Login = () => {
             errRef.current.focus();
         }
     }
+
+    useEffect(() => {
+        console.log(role);
+        if (role === "644e0d8ae22255e5791984b5") {
+            navigate("/admin", { replace: true })
+        }
+        else if (role === "644e0da2e22255e5791984b6") {
+            navigate("/admin")
+        }
+        else if (role === "644e0db8e22255e5791984b7") {
+            // <Navigate to="/hospitaladmin" replace />
+            navigate("/hospitaladmin", { replace: true })
+        }
+        else if (role === "644e0dc7e22255e5791984b8") {
+            navigate("/user")
+        }
+        else if (role === "644e0ddae22255e5791984b9") {
+            navigate("/doctor")
+        }
+    }, [role]);
 
     return (
 

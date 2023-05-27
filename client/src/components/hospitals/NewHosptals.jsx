@@ -45,6 +45,7 @@ const NewHospital = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+    console.log(values);
 
     try {
       const response = await axios.post(REGISTER_URL,

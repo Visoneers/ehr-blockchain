@@ -85,7 +85,7 @@ const MDRecord = () => {
       </Box>
 
       {/* Card */}
-
+      
       {
         filteredUser ? (
           filteredUser.map((user) => {
@@ -113,7 +113,10 @@ const MDRecord = () => {
                           <Button sx={{ fontSize: "14px", padding: "10px", backgroundColor: colors.blueAccent[500], color: colors.grey[100], }}>
                             <Link to={`addprescription/${user._id}`}>Add Prescription</Link>
                           </Button>
-                        </> : null
+                        </> : 
+                          <Button sx={{ fontSize: "14px", padding: "10px", backgroundColor: colors.blueAccent[500], color: colors.grey[100], }}>
+                            <Link to={`${loaction.pathname}/${user._id}`}>{loaction.pathname === "/doctor/update" ? "Update Medical Record" : "View Medical Record"}</Link>
+                          </Button>
                       }
                     </div>
                   </div>

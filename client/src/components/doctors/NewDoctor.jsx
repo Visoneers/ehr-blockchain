@@ -6,6 +6,7 @@ import { tokens } from '../../assets/theme';
 import axios from '../../api/axios';
 import useAuth from '../../hooks/useAuth';
 import AuthContext from '../../context/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 // import { DesktopDatePicker, LocalizationProvider } from '@mui/lab';
 // import DateAdapter from '@mui/lab/AdapterMoment';
@@ -15,6 +16,7 @@ import AuthContext from '../../context/AuthProvider';
 const NewDoctor = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const navigate = useNavigate();
 
   const [values, setValues] = useState(initialFValues);
   const [errors, setErrors] = useState("");
@@ -81,7 +83,7 @@ const NewDoctor = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-
+    console.log(values);
     try {
       console.log(auth.id)
       const hospitalId=localStorage.getItem("user_id")
@@ -101,6 +103,8 @@ const NewDoctor = () => {
       setEmail('');
       setPwd('');
       setMatchPwd('');
+      setValues(initialFValues);
+      navigate('/hospitaladmin/doctors')
     } catch (err) {
       if (!err?.response) {
         setErrors('No Server Response');
