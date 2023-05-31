@@ -163,56 +163,19 @@ console.log(prescrition,"prescrpytion jere")
                   </TableHead>
                   {prescrition.data.map((prescription)=>(
                   <TableBody>
-                    
-                    
                     <StyledTableRow> 
-                      
                       <TableCell>{prescription.name}</TableCell>
                       <TableCell align="right">{prescription.type}</TableCell>
                       <TableCell align="right">{prescription.days}</TableCell>
                       <TableCell align="right">{prescription.instruction}</TableCell>
-                      
                     </StyledTableRow>
-                    {/* <StyledTableRow>
-                      <TableCell>Astimin</TableCell>
-                      <TableCell align="right">Anti</TableCell>
-                      <TableCell align="right">5</TableCell>
-                      <TableCell align="right">None</TableCell>
-                    </StyledTableRow>
-                    <StyledTableRow>
-                      <TableCell>Sabril</TableCell>
-                      <TableCell align="right">Bio</TableCell>
-                      <TableCell align="right">5</TableCell>
-                      <TableCell align="right">None</TableCell>
-                    </StyledTableRow> */}
                   </TableBody>))}
                 </Table>
               </TableContainer>
             </Grid>
           </Grid>
         </Grid>
-        <br />
-        <Grid container spacing={1} direction="row">
-          <Grid item xs={12} container>
-            <Grid item xs={3} />
-            <Grid item xs={1} />
-            <Grid item xs={8}>
-              <TableContainer>
-                <Table sx={{ minWidth: 500 }} aria-label="simple table">
-                  <TableHead>
-                    <TableRow>
-                      <StyledTableCell>Diagnosis</StyledTableCell>
-                      <StyledTableCell>Instructions</StyledTableCell>
-                    </TableRow>
-                  </TableHead>
-                </Table>
-              </TableContainer>
-            </Grid>
-          </Grid>
-        </Grid>
-        <br />
-        <br />
-        <br />
+        <br /><br /><br /><br />
         <Grid container spacing={1} direction="row">
           <Grid item xs={12} container>
             <Grid item xs={3} />

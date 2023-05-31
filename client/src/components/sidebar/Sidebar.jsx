@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../assets/theme";
@@ -40,6 +40,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 const Sidebar = ({ menuOptions }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const navigate = useNavigate();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
   const userName = localStorage.getItem("user_name");
@@ -54,9 +55,14 @@ const Sidebar = ({ menuOptions }) => {
   const { setAuth } = useContext(AuthContext)
 
   const location = useLocation();
+  
   const handleLogout = () => {
     setAuth('');
-    <Navigate to="/login" state={{ from: location }} replace />
+    localStorage.removeItem('user_token');
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('user_role');
+    navigate("/login")
+    // <Navigate to="/login" state={{ from: location }} replace />
   }
 
   return (
@@ -144,6 +150,7 @@ const Sidebar = ({ menuOptions }) => {
                 />
               );
             })}
+            <Button onClick={handleLogout}>Logout</Button>
             <MenuItem
               style={{
                 color: colors.grey[100],

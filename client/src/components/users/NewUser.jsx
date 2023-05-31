@@ -301,9 +301,9 @@ const NewUser = () => {
                 <TextField
                   fullWidth
                   variant="outlined"
-                  label="Insurance Policy Number"
-                  name="policyNo"
-                  value={values.policyNo}
+                  label="Insurance Policy Name"
+                  name="insauranceName"
+                  value={values.insauranceName}
                   onChange={handleInputChange}
                   margin="normal"
                 />
@@ -356,7 +356,6 @@ const initialFValues = {
   id: "0",
   pinCode: "",
   fullName: "",
-  // email: "",
   mobileNo: "",
   city: "",
   gender: "Male",
@@ -366,7 +365,7 @@ const initialFValues = {
   age: 0,
   dob: "",
   guardianNo: "",
-  policyNo: "",
+  insauranceName: "",
   diseases: [""],
   allergies: [""],
   medicines: [""],

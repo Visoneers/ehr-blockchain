@@ -49,8 +49,8 @@ const [doctors,setDoctors]=useState([])
   const columns = [
     { field: "id", headerName: "ID" },
     {
-      field: "name",
-      headerName: "Name",
+      field: "fullName",
+      headerName: "Full Name",
       flex: 1,
       cellClassName: "name-column--cell",
     },
@@ -80,7 +80,7 @@ const [doctors,setDoctors]=useState([])
       field: "specialists",
       headerName: "Medical specialists",
       flex: 1,
-      renderCell: ({ row: { specialist } }) => {
+      renderCell: ({ row: { specialists } }) => {
         return (
           <Box
             minWidth="180px"
@@ -91,9 +91,14 @@ const [doctors,setDoctors]=useState([])
             backgroundColor={ colors.greenAccent[700] }
             borderRadius="4px"
           >
-            <Typography color={colors.grey[100]} sx={{ ml: "5px", fontSize: "14px" }}>
-              {specialist}
-            </Typography>
+            {specialists?.map((data) => {
+              return (
+                <Typography color={colors.grey[100]} sx={{ ml: "5px", fontSize: "14px" }}>
+                  {data}
+                </Typography>
+              )
+            })
+            }
           </Box>
         );
       },

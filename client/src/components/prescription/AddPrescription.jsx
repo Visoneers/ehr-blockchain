@@ -19,13 +19,13 @@ const AddPrescription = () => {
   const [medicines, setMedicines] = useState([medicinesTemplate]);
   const [errors, setErrors] = useState({});
 
-    const handleInputChange = e => {
-      const { name, value } = e.target
-      setValues({
-        ...values,
-        [name]: value
-      })
-    }
+  const handleInputChange = e => {
+    const { name, value } = e.target
+    setValues({
+      ...values,
+      [name]: value
+    })
+  }
 
   const addMultiInput = () => {
     setMedicines([...medicines, medicinesTemplate]);
@@ -87,6 +87,15 @@ const AddPrescription = () => {
             <InputLabel margin='dense' sx={{ fontSize: '14px', fontWeight: '500' }}>Medicines</InputLabel>
             <Button sx={{ backgroundColor: colors.blueAccent[800], p: 1 }} onClick={addMultiInput}>Add More</Button>
           </Box>
+          <TextField
+            fullWidth
+            variant="outlined"
+            label="Disease"
+            name="disease"
+            value={values.disease}
+            onChange={handleInputChange}
+            margin="normal"
+          />
           { 
             medicines.map((data, index) => (
                 <Grid container spacing={2} key={index}>
@@ -143,11 +152,11 @@ const AddPrescription = () => {
             fullWidth
             variant="outlined"
             label="Note"
-            name="notes ......"
+            name="note"
             value={values.note}
             multiline
             rows={4}
-            onChange={e => handleInputChange(e)}
+            onChange={handleInputChange}
             margin="normal"
           />
             
@@ -181,4 +190,5 @@ const initialFValues = {
   patientID: "",
   doctorID: "",
   date: "",
+  disease: ""
 };
