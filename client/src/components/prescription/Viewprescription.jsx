@@ -55,7 +55,7 @@ const Viewprescription = () => {
           }
         );
         console.log("set prescription");
-        console.log(response.data[0]);
+        console.log(response.data);
         setPrescrition(response.data[0]);
       } catch (error) {
         console.error(error);
@@ -95,13 +95,13 @@ console.log(prescrition,"prescrpytion jere")
           <Grid item xs={12} container padding={1}>
             <Grid item xs={8}>
               <Typography variant="h5">
-                <b>Patient ID</b>:{prescrition.userId} , <b>Prescription ID</b>: {prescrition._id}
+                <b>Patient ID</b>:{prescrition?.userId} , <b>Prescription ID</b>: {prescrition._id}
               </Typography>
             </Grid>
             <Grid item xs={2} />
             <Grid item xs={2}>
               <Typography variant="h5">
-                <b>Date</b>:{formatDate(prescrition.createdAt)}
+                <b>Date</b>:{formatDate(prescrition?.createdAt)}
               </Typography>
             </Grid>
           </Grid>
@@ -111,16 +111,16 @@ console.log(prescrition,"prescrpytion jere")
           <Grid item xs={12} container padding={1}>
             <Grid item xs={2}>
               <Typography variant="h4">
-                <b>{prescrition.doctor.fullName}</b>
-              </Typography>{prescrition.doctor.specialists}<br />
+                <b>{prescrition.doctor?.fullName}</b>
+              </Typography>{prescrition.doctor?.specialists}<br />
               <b>Nephrology</b>
               <br />MBBS<br />
             </Grid>
             <Grid item xs={2} />
             <Grid item xs={8}>
               <Typography variant="h4">
-                <b>{prescrition.hospital[0].name}</b>
-              </Typography>{prescrition.hospital[0].address},{prescrition.hospital[0].city},{prescrition.hospital[0].pincode}<br />{prescrition.hospital[0].email}<br />{prescrition.hospital[0].contact}
+                <b>{prescrition.hospital[0]?.name}</b>
+              </Typography>{prescrition.hospital[0]?.address},{prescrition.hospital[0].city},{prescrition.hospital[0].pincode}<br />{prescrition.hospital[0].email}<br />{prescrition.hospital[0].contact}
             </Grid>
           </Grid>
         </Grid>
@@ -134,8 +134,8 @@ console.log(prescrition,"prescrpytion jere")
           <Grid item xs={12} container padding={1}>
             <Grid item xs={12}>
               <Typography variant="h5">
-                <b>Patient Name</b>: {prescrition.user[0].name}, <b>Age</b>: {prescrition.user[0].age} Years,{" "}
-                <b>Sex</b>: {prescrition.user[0].gender}, <b>Insurance Name</b>: {prescrition.user[0].insauranceName}
+                <b>Patient Name</b>: {prescrition.user[0]?.name}, <b>Age</b>: {prescrition.user[0].age} Years,{" "}
+                <b>Sex</b>: {prescrition.user[0]?.gender}, <b>Insurance Name</b>: {prescrition.user[0].insauranceName}
               </Typography>
             </Grid>
           </Grid>

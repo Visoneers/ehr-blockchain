@@ -8,7 +8,11 @@ import { ImageConfig } from "../../assets/images/imageConfig";
 import { LoadBlockchainData } from "../../api/web3";
 import { tokens } from "../../assets/theme";
 import axios from 'axios';
+<<<<<<< Updated upstream
 import BigNumber from 'bignumber.js';
+=======
+import Prescription from '../prescription/Prescriptions';
+>>>>>>> Stashed changes
 
 const Viewrecord = () => {
   const theme = useTheme();
@@ -45,7 +49,7 @@ useEffect(() => {
   // useEffect(() => {
   fetchPrescription();
   // }, []);
-
+console.log(profile)
   return () => {
     isMounted = false;
     controller.abort();

@@ -50,7 +50,7 @@ const Sidebar = ({ menuOptions }) => {
     if (role == "644e0da2e22255e5791984b6") return "Society Admin";
     if (role == "644e0db8e22255e5791984b7") return "Hospital Admin";
     if (role == "644e0dc7e22255e5791984b8") return "User";
-    if ((role = "644e0ddae22255e5791984b9")) return "Doctor";
+    if (role == "644e0ddae22255e5791984b9") return "Doctor";
   };
   const { setAuth } = useContext(AuthContext)
 
