@@ -55,6 +55,7 @@ function App() {
         <CssBaseline />
         <Routes>
           <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Login />} />
 
             {/* Admin Routes */}
             <Route element={<RequireAuth allowedRole="644e0d8ae22255e5791984b5" />}>
@@ -105,7 +106,7 @@ function App() {
             </Route>
 
             {/* User Routes */}
-            <Route element={<RequireAuth allowedRole="644e0ddae22255e5791984b9" />}>
+            <Route element={<RequireAuth allowedRole="644e0dc7e22255e5791984b8" />}>
               <Route path="/user" element={<User />}>
                 <Route index element={<Dashboard />} />
                 <Route path="records/:userID" element={<ViewRecord />} />

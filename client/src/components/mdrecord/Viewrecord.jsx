@@ -3,11 +3,12 @@ import { Link, useParams } from 'react-router-dom';
 import moment from 'moment';
 import { Box, Button, IconButton, InputBase, Typography, useTheme, Grid, Paper } from "@mui/material";
 import WcIcon from '@mui/icons-material/Wc';
-
+import {Types} from "mongoose"
 import { ImageConfig } from "../../assets/images/imageConfig";
 import { LoadBlockchainData } from "../../api/web3";
 import { tokens } from "../../assets/theme";
 import axios from 'axios';
+import BigNumber from 'bignumber.js';
 
 const Viewrecord = () => {
   const theme = useTheme();
@@ -56,13 +57,17 @@ useEffect(() => {
       if(file){
         setFiles(file)
       }
-      const filtereddata = file.filter((filedata) =>
-      filedata.userId === userID
+      
+      const filtereddata = file.filter((filedata) =>{
+         const mongoID=BigNumber(filedata.userId).toString(16)
+         console.log(mongoID)
+         return mongoID === userID
+        }
       );
       setFilteredFiles(filtereddata)
     })();
   },[]);
-  console.log(profile,"user profile")
+  console.log(files,"user file")
   return (
     <Box m="20px">
       {profile? <Box mb="20px" sx={{ border: '1px solid grey', padding:"20px", borderRadius: "8px"}}>

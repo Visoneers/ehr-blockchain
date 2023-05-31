@@ -32,7 +32,7 @@ const Dashboard = () => {
       try {
         console.log(userId);
         const response = await axios.get(
-          `http://localhost:3000/prescription/topDieases/${userId}}/${userRole}`,
+          `http://localhost:3000/prescription/topDieases/${userId}/${userRole}`,
        
           {
             headers: { "Content-Type": "application/json" },
@@ -57,7 +57,9 @@ const Dashboard = () => {
       controller.abort();
     };
   }, []);
-  console.log(toPrescriptionDiseases,"presss")
+  if(toPrescriptionDiseases?.length>0){
+    console.log(toPrescriptionDiseases[0]?._id,"presssdtdtyf")
+  }
   return (
     <Box m="20px">
       {/* HEADER */}
@@ -100,10 +102,10 @@ const Dashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="32,441"
-            subtitle="New Clients"
-            progress="0.30"
-            increase="+5%"
+            // subtitle={toPrescriptionDiseases[0].count}
+            // title={toPrescriptionDiseases[0]._id}
+            // progress="0.30"
+            
             icon={
               <PersonAddIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}

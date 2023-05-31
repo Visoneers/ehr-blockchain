@@ -160,6 +160,12 @@ console.log(users)
         <Box>
           <Box display="flex" justifyContent="space-between" alignItems="center">
             <Header title="USERS" subtitle="Managing The Users" />
+            <Link to="http://localhost:5000">
+              <Button sx={{ fontSize: "12px", padding: "12px", backgroundColor: colors.greenAccent[500], color: colors.grey[100], }}>
+                <UserIcon style={{ height: 30, width: 30, padding: 5, marginRight: 7 }} />
+                add new user
+              </Button>
+            </Link>
             <Link to={`${location.pathname}/addnewuser`} >
               <Button sx={{ fontSize: "12px", padding: "12px", backgroundColor: colors.greenAccent[500], color: colors.grey[100], }}>
                 <UserIcon style={{ height: 30, width: 30, padding: 5, marginRight: 7 }} />

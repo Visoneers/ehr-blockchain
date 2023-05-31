@@ -7,18 +7,20 @@ import SearchIcon from "@mui/icons-material/Search";
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { ImageConfig } from "../../assets/images/imageConfig";
+import { BigNumber } from 'bignumber.js';
 
 import MDStorage from '../../abis/MDStorage.json'
 import ipfs from "../../api/ipfs";
 import Header from "../header/Header";
 
 import './MDupdate.scss';
+import { useParams } from "react-router-dom";
 
 const MDupdate = ({account}) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [file, setFile] = useState(null);
-
+  let {userID}=useParams()
   const wrapperRef = useRef(null);
 
   const onDragEnter = () => wrapperRef.current.classList.add('dragover');
@@ -45,6 +47,7 @@ const MDupdate = ({account}) => {
     }
   }
   const uploadFile = async () => {
+
     console.log("Submitting file to IPFS...")
     const web3 = new Web3(window.ethereum)
     console.log(file);
@@ -65,7 +68,16 @@ const MDupdate = ({account}) => {
       // Add file to the IPFS
       const added = await ipfs.add(file.buffer);
       console.log(added)
-      mdstorage.methods.uploadFile(123456789, added?.path, added?.size, file.type, file.name, file.description).send({ from: `${account.toString()}` }).on('transactionHash', (hash) => {
+      if (!web3.utils.isAddress(account.toString())) {
+        // Handle invalid Ethereum address
+        console.log('Invalid Ethereum address:', account.toString());
+        return;
+      }
+      console.log(BigNumber(userID,16).toString(10))
+      const userIDString = new BigNumber(userID,16).toString(10);
+
+      console.log(userIDString)
+      mdstorage.methods.uploadFile(userIDString, added?.path, added?.size, file.type, file.name, file.description).send({ from: `${account.toString()}` }).on('transactionHash', (hash) => {
         window.location.reload()
       }).on('error', (e) => {
         window.alert('Error')

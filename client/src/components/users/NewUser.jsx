@@ -5,9 +5,11 @@ import { useTheme } from '@emotion/react';
 import { tokens } from '../../assets/theme';
 import axios from '../../api/axios';
 
-// import { DesktopDatePicker, LocalizationProvider } from '@mui/lab';
-// import DateAdapter from '@mui/lab/AdapterMoment';
-// import MomentUtils from "@date-io/moment";
+import { DesktopDatePicker,  } from '@mui/lab';
+import {LocalizationProvider}from "@mui/x-date-pickers/LocalizationProvider"
+
+import DateAdapter from '@mui/lab/AdapterMoment';
+import MomentUtils from "@date-io/moment";
 import moment from 'moment';
 
 const NewUser = () => {
@@ -73,12 +75,12 @@ const NewUser = () => {
     }))
   }
 
-  // const handleDateChange = (e) => {
-  //   setValues({
-  //     ...values,
-  //     dob: moment(e).format('MMMM D, YYYY')
-  //   })
-  // }
+  const handleDateChange = (e) => {
+    setValues({
+      ...values,
+      dob: moment(e).format('DD,MM,YYYY')
+    })
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault()

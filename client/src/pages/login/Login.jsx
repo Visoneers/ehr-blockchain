@@ -49,7 +49,8 @@ const Login = () => {
             const roles = response?.data?.data.role;
             const id = response?.data?.data.id;
             const users = response?.data.data.user;
-            setRole(roles)            const name=response?.data.data.user.name
+            setRole(roles)            
+            const name=response?.data.data.user.name
 
             console.log(id, roles, accessToken, users)
             localStorage.setItem("user_token", accessToken);

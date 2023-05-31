@@ -42,7 +42,7 @@ contract MDStorage {
         // Make sure file fileName exists
         require(bytes(_fileName).length > 0);
         // Make sure file userId exists
-        require(bytes(_fileName).length > 0);
+        require(bytes(userId).length > 0);
         // Make sure uploader address exists
         require(msg.sender != address(0));
         // Make sure file size is more than 0

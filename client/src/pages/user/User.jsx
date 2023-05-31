@@ -16,7 +16,7 @@ const User = () => {
     const menuOptions = [{
         "id": 1,
         "title": "Dashboard",
-        "to": "/",
+        "to": "/user",
         "icon": <HomeIcon />,
     }, {
         "id": 2,

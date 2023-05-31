@@ -33,8 +33,8 @@ const MDRecord = () => {
             withCredentials: true
           });
           console.log("hi")
-          console.log(response.data.data[0].paginetResult)
-          setUsers(response.data.data[0].paginetResult);
+          console.log(response.data.data)
+          setUsers(response.data.data);
         }
         //hospital
         if (role === "644e0db8e22255e5791984b7") {
@@ -64,7 +64,7 @@ const MDRecord = () => {
 
   const [searchfield, setsearchfield] = useState('')
   const filteredUser = users?.filter((user) => user.name.toLowerCase().includes(searchfield.toLowerCase()));
-  console.log(filteredUser);
+  
 
   return (
     <>
@@ -115,7 +115,7 @@ const MDRecord = () => {
                           </Button>
                         </> : 
                           <Button sx={{ fontSize: "14px", padding: "10px", backgroundColor: colors.blueAccent[500], color: colors.grey[100], }}>
-                            <Link to={`${loaction.pathname}/${user._id}`}>{loaction.pathname === "/doctor/update" ? "Update Medical Record" : "View Medical Record"}</Link>
+                            <Link to={`${loaction.pathname}/${user._id}`}>{loaction.pathname === "/doctor/update" ? "c" : "View Medical Record"}</Link>
                           </Button>
                       }
                     </div>
