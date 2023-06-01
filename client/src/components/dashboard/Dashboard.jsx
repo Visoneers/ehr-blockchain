@@ -90,10 +90,11 @@ const Dashboard = () => {
           subtitle={toPrescriptionDiseases[0].diseases[0]?.count}
           title={toPrescriptionDiseases[0].diseases[0]?._id}
           progress={toPrescriptionDiseases[0].diseases[0]?.count/toPrescriptionDiseases[0].total}
+          
         
           icon={
             <SickIcon
-              sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+              sx={{ color: colors.grey[600], fontSize: "26px" }}
             />
         }
       />
