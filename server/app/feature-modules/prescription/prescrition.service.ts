@@ -6,7 +6,7 @@ import { PrescriptionModel } from "./prescription.schema";
 
 const create = async (data: Partial<IPrescription>) => {
     const result = await PrescriptionModel.create(data)
-    if (!result) throw ("user not created")
+    if (!result) throw ("prescription not created")
     return result
 }
 
@@ -108,18 +108,32 @@ const getTopDieases = (role: any, userId: any) => {
  
     const topDieasesPipeline = [
         {
-            $group: {
-                _id: "$diseases",
-                count: { $sum: 1 }
-            }
-        }, {
-            $sort: {
-                count: -1
-            }
-        }, {
-            $limit: 6
-        }
-    ]
+          $group: {
+            _id: "$diseases",
+            count: { $sum: 1 }
+          }
+        },
+        {
+          $sort: {
+            count: -1
+          }
+        },
+        {
+          $group: {
+            _id: null,
+            total: { $sum: "$count" },
+            diseases: { $push: { _id: "$_id", count: "$count" } }
+          }
+        },
+        {
+          $project: {
+            _id: 0,
+            total: 1,
+            diseases: 1
+          }
+        },
+        
+      ];
     return PrescriptionModel.aggregate([...userPipeline, ...topDieasesPipeline])
 }
 export default {

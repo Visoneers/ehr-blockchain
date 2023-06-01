@@ -81,7 +81,7 @@ const Prescription = () => {
                       }}
                     >
                       <Typography variant="h3" color={colors.grey[100]}>
-                      {prescription.doctor && prescription.doctor[0] && prescription.doctor[0].fullName}
+                      {prescription.doctor && prescription.doctor[0] && prescription.doctor[0].name}
                       </Typography>
                       <Typography variant="h5" color={colors.grey[100]}>
                       {prescription.diseases}

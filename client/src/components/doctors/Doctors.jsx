@@ -49,7 +49,7 @@ const [doctors,setDoctors]=useState([])
   const columns = [
     { field: "id", headerName: "ID" },
     {
-      field: "fullName",
+      field: "name",
       headerName: "Full Name",
       flex: 1,
       cellClassName: "name-column--cell",
@@ -146,7 +146,7 @@ const [doctors,setDoctors]=useState([])
         }}
       >
        {doctors? <DataGrid 
-        checkboxSelection 
+        
         rows={doctors} 
         columns={columns} 
         sx={{ fontSize: "14px" }}/>:null}

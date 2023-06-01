@@ -7,7 +7,7 @@ import { ReactComponent as AdminIcon } from '../../assets/icons/admin.svg';
 import Header from '../header/Header';
 import { tokens } from '../../assets/theme';
 import { mockDataUsers } from '../../assets/data/mockData';
-
+import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 const Hospitals = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -129,7 +129,7 @@ console.log(rows)
             <Header title="HOSPITALS" subtitle="Managing The Hospital" />
             <Link to="/admin/hospitals/addnewhospital">
               <Button sx={{ fontSize: "12px", padding: "12px", backgroundColor: colors.greenAccent[500], color: colors.grey[100], }}>
-                <AdminIcon style={{ height: 30, width: 30, padding: 5, marginRight: 7 }} />
+                <AddBusinessIcon style={{ height: 30, width: 30, padding: 5, marginRight: 7 }} />
                 add new hospital
               </Button>
             </Link>

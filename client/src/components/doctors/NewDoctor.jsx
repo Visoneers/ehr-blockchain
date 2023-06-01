@@ -88,7 +88,7 @@ const NewDoctor = () => {
       console.log(auth.id)
       const hospitalId=localStorage.getItem("user_id")
       const response = await axios.post(REGISTER_URL,
-        JSON.stringify({ email, password:pwd,...values,hospitalId:hospitalId ,name:values.fullname,role: '644e0ddae22255e5791984b9' }),
+        JSON.stringify({ email, password:pwd,...values,hospitalId:hospitalId ,role: '644e0ddae22255e5791984b9' }),
         {
           headers: {
           'Accept' : 'application/json',
@@ -128,10 +128,10 @@ const NewDoctor = () => {
                   required
                   variant="outlined"
                   label="Full Name"
-                  name="fullName"
+                  name="name"
                   autoComplete="on"
                   onChange={handleInputChange}
-                  value={values.fullName}
+                  value={values.name}
                   margin="normal"
                 />
                 <TextField

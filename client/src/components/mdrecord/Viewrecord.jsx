@@ -8,12 +8,9 @@ import { ImageConfig } from "../../assets/images/imageConfig";
 import { LoadBlockchainData } from "../../api/web3";
 import { tokens } from "../../assets/theme";
 import axios from 'axios';
-<<<<<<< Updated upstream
 import BigNumber from 'bignumber.js';
-=======
 import Prescription from '../prescription/Prescriptions';
->>>>>>> Stashed changes
-
+import { ReactComponent as UserIcon } from '../../assets/icons/user.svg';
 const Viewrecord = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -74,6 +71,12 @@ console.log(profile)
   console.log(files,"user file")
   return (
     <Box m="20px">
+       <Link to="http://localhost:5000">
+          <Button sx={{ fontSize: "12px", padding: "12px", backgroundColor: colors.greenAccent[500], color: colors.grey[100], }}>
+            <UserIcon style={{ height: 30, width: 30, padding: 5, marginRight: 7 }} />
+                Predict Disease
+          </Button>
+       </Link>
       {profile? <Box mb="20px" sx={{ border: '1px solid grey', padding:"20px", borderRadius: "8px"}}>
         <Grid container border='none'>
           <Grid item lg={12} xs={12}>

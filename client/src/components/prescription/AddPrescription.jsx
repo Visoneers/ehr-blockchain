@@ -91,8 +91,8 @@ const AddPrescription = () => {
             fullWidth
             variant="outlined"
             label="Disease"
-            name="disease"
-            value={values.disease}
+            name="diseases"
+            value={values.diseases}
             onChange={handleInputChange}
             margin="normal"
           />
@@ -190,5 +190,5 @@ const initialFValues = {
   patientID: "",
   doctorID: "",
   date: "",
-  disease: ""
+  diseases: ""
 };

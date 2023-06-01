@@ -39,7 +39,6 @@ const doctorSchema=new BaseSchema({
     pinCode:Number,
     gender:String,
     address:String,
-    fullName:String
 })
 
 type doctorDocument=Document &IDoctor

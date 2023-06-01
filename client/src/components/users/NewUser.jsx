@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Grid, TextField, FormControl, FormLabel, InputLabel, RadioGroup, FormControlLabel, Radio, Button, IconButton } from '@mui/material';
+import { Box, Grid, TextField, FormControl, FormLabel, InputLabel, RadioGroup, FormControlLabel, Radio, Button, IconButton, MenuItem } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useTheme } from '@emotion/react';
 import { tokens } from '../../assets/theme';
 import axios from '../../api/axios';
+// import MenuItem from '@material-ui/core/MenuItem';
 
 import { DesktopDatePicker,  } from '@mui/lab';
 import {LocalizationProvider}from "@mui/x-date-pickers/LocalizationProvider"
@@ -28,6 +29,7 @@ const NewUser = () => {
   const [matchPwd, setMatchPwd] = useState('');
   const [validMatch, setValidMatch] = useState(false);
 
+  const [societies,setSocieties]=useState([])
   useEffect(() => {
     setValidEmail(EMAIL_REGEX.test(email));
   }, [email])
@@ -39,6 +41,7 @@ const NewUser = () => {
 
   const handleInputChange = e => {
     const { name, value } = e.target
+    console.log(name,value)
     setValues({
       ...values,
       [name]: value
@@ -97,7 +100,7 @@ const NewUser = () => {
         }
       );
       // TODO: remove console.logs before deployment
-      console.log(JSON.stringify(response?.data));
+      // console.log(JSON.stringify(response?.data));
       //clear state and controlled inputs
       setEmail('');
       setPwd('');
@@ -113,7 +116,38 @@ const NewUser = () => {
       }
     }
   }
+  useEffect(() => {
+    let isMounted = true;
+    const controller = new AbortController();
 
+    const fetchSocieties = async () => {
+      try {
+       
+        const response = await axios.get(
+          `http://localhost:3000/society/`,
+          {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true
+          }
+        );
+        console.log("set society");
+        console.log(response.data.data);
+        setSocieties(response.data.data[0].paginetResult);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    // useEffect(() => {
+    fetchSocieties();
+    // }, []);
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
+  }, []);
+  console.log(societies,"societies")
   return (
     <>
       <Box m='20px'>
@@ -261,15 +295,38 @@ const NewUser = () => {
                     disableMaskedInput={true}
                   />
                 </LocalizationProvider> */}
-                <TextField
-                  fullWidth
-                  variant="outlined"
-                  label="Society Id"
-                  name="societyId"
-                  value={values.societyId}
-                  onChange={handleInputChange}
-                  margin="normal"
-                />
+ <TextField
+  fullWidth
+  variant="outlined"
+  label="Society Id"
+  name="societyId"
+  select
+  value={values.societyId}
+  onChange={handleInputChange}
+  margin="normal"
+  SelectProps={{
+    MenuProps: {
+      getContentAnchorEl: null,
+      anchorOrigin: {
+        vertical: 'bottom',
+        horizontal: 'right',
+      },
+    },
+  }}
+  inputProps={{
+    style: { padding: '10px' }, // Custom styling for the input text
+  }}
+  SelectDisplayProps={{
+    style: { maxHeight: '200px' }, // Custom styling for the options list
+  }}
+>
+  {societies.map(society => (
+    <MenuItem key={society._id} value={society._id}>
+      {society.name}
+    </MenuItem>
+  ))}
+</TextField>
+
                 {!values.societyId ?
                   <>
                     <TextField

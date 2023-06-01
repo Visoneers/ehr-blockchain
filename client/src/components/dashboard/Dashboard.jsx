@@ -10,6 +10,7 @@ import GeographyChart from "./GeographyChart";
 import StatBox from "./StatBox";
 import axios from 'axios';
 import Prescription from '../prescription/Prescriptions';
+import SickIcon from '@mui/icons-material/Sick';
 
 const headCells = [
   { id: "first_name", label: "Name", align: "" },
@@ -57,9 +58,9 @@ const Dashboard = () => {
       controller.abort();
     };
   }, []);
-  if(toPrescriptionDiseases?.length>0){
-    console.log(toPrescriptionDiseases[0]?._id,"presssdtdtyf")
-  }
+// if(toPrescriptionDiseases[0]?.diseases){
+//   console.log(toPrescriptionDiseases[0]?.diseases)
+// }
   return (
     <Box m="20px">
       {/* HEADER */}
@@ -68,50 +69,82 @@ const Dashboard = () => {
       </Box>
 
       {/* GRID & CHARTS */}
-      <Box
+       <Box
         display="grid"
         gridTemplateColumns="repeat(12, 1fr)"
         gridAutoRows="140px"
         gap="20px"
       >
         {/* ROW 1 */}
-        <Box
+         <Box
           gridColumn="span 3"
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"
           justifyContent="center"
-          // subtitle={toPrescriptionDiseases[0]._id}
+          
         >
-
-        </Box>
-        <Box
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-    
-        </Box>
-        <Box
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
+          {
+          toPrescriptionDiseases? toPrescriptionDiseases[0]?.diseases[0] ?
           <StatBox
-            // subtitle={toPrescriptionDiseases[0].count}
-            // title={toPrescriptionDiseases[0]._id}
-            // progress="0.30"
+          subtitle={toPrescriptionDiseases[0].diseases[0]?.count}
+          title={toPrescriptionDiseases[0].diseases[0]?._id}
+          progress={toPrescriptionDiseases[0].diseases[0]?.count/toPrescriptionDiseases[0].total}
+        
+          icon={
+            <SickIcon
+              sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+            />
+        }
+      />
+      :null:null
+    }
+
+        </Box> 
+         <Box
+          gridColumn="span 3"
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          {
+          toPrescriptionDiseases? toPrescriptionDiseases[0]?.diseases[1]?
+          <StatBox
+            subtitle={toPrescriptionDiseases[0]?.diseases[1]?.count}
+            title={toPrescriptionDiseases[0]?.diseases[1]?._id}
+            progress="0.30"
             
             icon={
-              <PersonAddIcon
+              <SickIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
               />
             }
           />
+          :null:null
+        }
+        </Box> 
+        <Box
+          gridColumn="span 3"
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          {toPrescriptionDiseases ? toPrescriptionDiseases[0]?.diseases[2]?
+          <StatBox
+            subtitle={toPrescriptionDiseases[0]?.diseases[2]?.count}
+            title={toPrescriptionDiseases[0]?.diseases[2]?._id}
+            progress="0.30"
+            
+            icon={
+              <SickIcon
+                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+              />
+            }
+          />
+          :null:null
+        }
         </Box>
         <Box
           gridColumn="span 3"
@@ -120,17 +153,44 @@ const Dashboard = () => {
           alignItems="center"
           justifyContent="center"
         >
+          {toPrescriptionDiseases ? toPrescriptionDiseases[0]?.diseases[3]?
           <StatBox
-            title="44,797,269"
-            subtitle="Coronavirus Cases:"
-            increase="+3%"
+            subtitle={toPrescriptionDiseases[0]?.diseases[3]?.count}
+            title={toPrescriptionDiseases[0]?.diseases[3]?._id}
+            progress="0.30"
+            
             icon={
-              <img src={IndiaIcon} alt="logo" style={{ width: "35px", height: "30px"}} />
+              <SickIcon
+                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+              />
             }
           />
+          :null:null
+        }
         </Box>
+       {/* <Box
+          gridColumn="span 3"
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          
+          {toPrescriptionDiseases[0]?.diseases[3]?
+          <StatBox
+            subtitle={toPrescriptionDiseases[0]?.diseases[3]?.count}
+            title={toPrescriptionDiseases[0]?.diseases[3]?._id}
+            progress="0.30"
+            
+            icon={
+              <SickIcon
+                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+              />
+            }
+          />:null}
+        </Box>   */}
 
-        {/* ROW 2 */}
+         {/* ROW 2  */}
         <Box
           gridColumn="span 4"
           gridRow="span 2"
