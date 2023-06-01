@@ -24,6 +24,7 @@
     "babel-preset-es2015": "^6.24.1",
     "bignumber.js": "^9.1.1",
     "buffer": "^6.0.3",
+    "dayjs": "^1.11.7",
     "dotenv": "^16.0.3",
     "firebase": "^9.22.0",
     "ipfs-http-client": "60.0.0",

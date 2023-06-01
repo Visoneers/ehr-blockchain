@@ -20,13 +20,13 @@ const menuOptions = [{
   "icon": <ListIcon />
 }, {
   "id": 3,
-  "title": "View Records",
+  "title": "Medical Records",
   "to": "/doctor/records",
   "icon": <UpdateIcon />
 }, {
   "id": 4,
-  "title": "Update Records",
-  "to": "/doctor/update",
+  "title": "Prescription",
+  "to": "/doctor/prescriptions",
   "icon": <UpdateIcon />
 }
 ]

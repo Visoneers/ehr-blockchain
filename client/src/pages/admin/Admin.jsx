@@ -26,6 +26,11 @@ const menuOptions = [{
   "title": "Hospitals",
   "to": "/admin/hospitals",
   "icon": <HospitalIcon />
+}, {
+  "id": 4,
+  "title": "Society",
+  "to": "/admin/society",
+  "icon": <HospitalIcon />
 }
 ]
 

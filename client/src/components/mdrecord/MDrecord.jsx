@@ -17,7 +17,8 @@ const MDRecord = () => {
   const colors = tokens(theme.palette.mode);
   const loaction = useLocation();
   const [users, setUsers] = useState([]);
-  const { auth } = useContext(AuthContext);
+  const role = localStorage.getItem('user_role');
+  console.log(loaction.pathname.split("/")[2]);
 
   useEffect(() => {
     let isMounted = true;
@@ -100,23 +101,54 @@ const MDRecord = () => {
                         <Typography variant="h5" color={colors.greenAccent[300]}>{user._id}</Typography>
                       </Box>
                     </div>
+                    <p>{loaction.pathname}</p>
                     <div className="account-item-action">
                       {
-                        auth?.roles === "644e0ddae22255e5791984b9" ? 
-                        <>
-                          <Button sx={{ fontSize: "14px", padding: "10px", backgroundColor: colors.blueAccent[500], color: colors.grey[100], }}>
-                            <Link to={`prescriptions/${user._id}`}>View Prescription</Link>
-                          </Button>
-                          <Button sx={{ fontSize: "14px", padding: "10px", backgroundColor: colors.blueAccent[500], color: colors.grey[100], }}>
-                            <Link to={`${loaction.pathname}/${user._id}`}>{loaction.pathname === "/doctor/update" ? "Update Medical Record" : "View Medical Record"}</Link>
-                          </Button>
-                          <Button sx={{ fontSize: "14px", padding: "10px", backgroundColor: colors.blueAccent[500], color: colors.grey[100], }}>
-                            <Link to={`addprescription/${user._id}`}>Add Prescription</Link>
-                          </Button>
-                        </> : 
-                          <Button sx={{ fontSize: "14px", padding: "10px", backgroundColor: colors.blueAccent[500], color: colors.grey[100], }}>
-                            <Link to={`${loaction.pathname}/${user._id}`}>{loaction.pathname === "/doctor/update" ? "c" : "View Medical Record"}</Link>
-                          </Button>
+                        loaction.pathname.split("/")[2] === "prescriptions" ? 
+                          <>
+                            <Button sx={{ fontSize: "14px", padding: "10px", backgroundColor: colors.blueAccent[500], color: colors.grey[100], }}>
+                              <Link to={`${user._id}`}>View Prescription</Link>
+                            </Button>
+                            {
+                              role === "644e0ddae22255e5791984b9" ? 
+                              <Button sx={{ fontSize: "14px", padding: "10px", backgroundColor: colors.blueAccent[500], color: colors.grey[100], }}>
+                                <Link to={`update/${user._id}`}>Add Prescription</Link>
+                              </Button> : null
+                            }
+                          </> : 
+                          <>
+                            <Button sx={{ fontSize: "14px", padding: "10px", backgroundColor: colors.blueAccent[500], color: colors.grey[100], }}>
+                              <Link to={`update/${user._id}`}>Update Medical Record</Link>
+                            </Button>
+                            {
+                              role === "644e0ddae22255e5791984b9" ?
+                                <Button sx={{ fontSize: "14px", padding: "10px", backgroundColor: colors.blueAccent[500], color: colors.grey[100], }}>
+                                  <Link to={`${loaction.pathname}/${user._id}`}>View Medical Record</Link>
+                                </Button> : null
+
+                            }
+                          </>
+                      //   <>
+                      //     <Button sx={{ fontSize: "14px", padding: "10px", backgroundColor: colors.blueAccent[500], color: colors.grey[100], }}>
+                      //       <Link to={`prescriptions/${user._id}`}>View Prescription</Link>
+                      //     </Button>
+                      //     <Button sx={{ fontSize: "14px", padding: "10px", backgroundColor: colors.blueAccent[500], color: colors.grey[100], }}>
+                      //       <Link to={`addprescription/${user._id}`}>Add Prescription</Link>
+                      //     </Button>
+                      //     </> : 
+                      //     <>
+                      //   <Button sx={{ fontSize: "14px", padding: "10px", backgroundColor: colors.blueAccent[500], color: colors.grey[100], }}>
+                      //     <Link to={`${loaction.pathname}/${user._id}`}>{loaction.pathname === "/doctor/update" ? "c" : "View Medical Record"}</Link>
+                      //   </Button>
+                      // </>
+                      //   // <>
+                      //   // <Button sx={{ fontSize: "14px", padding: "10px", backgroundColor: colors.blueAccent[500], color: colors.grey[100], }}>
+                      //   //     <Link to={`${loaction.pathname}/${user._id}`}>{loaction.pathname === "/doctor/update" ? "Update Medical Record" : "View Medical Record"}</Link>
+                      //   //   </Button>
+                      //   //   <Button sx={{ fontSize: "14px", padding: "10px", backgroundColor: colors.blueAccent[500], color: colors.grey[100], }}>
+                      //   //     <Link to={`${loaction.pathname}/${user._id}`}>{loaction.pathname === "/doctor/update" ? "c" : "View Medical Record"}</Link>
+                      //   //   </Button>
+                        // </> 
                       }
                     </div>
                   </div>

@@ -28,6 +28,9 @@ import NewHospitals from "./components/hospitals/NewHosptals";
 import NewDoctor from "./components/doctors/NewDoctor";
 import Prescription from "./components/prescription/Prescriptions";
 import Viewprescription from "./components/prescription/Viewprescription";
+import AddPrescription from "./components/prescription/AddPrescription";
+import Society from "./components/society/Society";
+import Newsociety from "./components/society/AddSociety";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -69,6 +72,8 @@ function App() {
                 <Route path="update/:userID" element={<MDupdate account={account} />} />
                 <Route path="records" element={<MDrecord action="records" />} />
                 <Route path="records/:userID" element={<ViewRecord />} />
+                <Route path="society" element={<Society />} />
+                <Route path="society/addnewsociety" element={<Newsociety />} />
               </Route>
             </Route>
 
@@ -80,8 +85,8 @@ function App() {
                 <Route path="users/addnewuser" element={<NewUser />} />
                 <Route path="doctors" element={<Doctors />} />
                 <Route path="doctors/addnewdoctor" element={<NewDoctor />} />
-                <Route path="update" element={<MDrecord />} />
-                <Route path="update/:userID" element={<MDupdate account={account} />} />
+                <Route path="records" element={<MDrecord />} />
+                <Route path="records/update/:userID" element={<MDupdate account={account} />} />
               </Route>
             </Route>
 
@@ -92,16 +97,17 @@ function App() {
                 <Route index element={<Dashboard />} />
                 <Route path="users" element={<Users />} />
                 <Route path="users/addnewuser" element={<NewUser />} />
-                <Route path="update" element={<MDrecord />} />
-                <Route path="update/:userID" element={<MDupdate account={account} />} />
+                <Route path="records/update/:userID" element={<MDupdate account={account} />} />
                 <Route path="records" element={<MDrecord />} />
                 <Route path="records/:userID" element={<ViewRecord />} />
-                <Route path="update/prescriptions/:userID" element={<Prescription />} />
+                <Route path="prescriptions" element={<MDrecord />} />
+                <Route path="prescriptions/:userID/" element={<Prescription />} />
+                <Route path="prescriptions/update/:userID/" element={<AddPrescription />} />
+                <Route path="prescriptions/:userID/:prescriptionID" element={<Viewprescription />} />
+                {/* <Route path="update/prescriptions/:userID" element={<Prescription />} />
                 <Route path="records/prescriptions/:userID" element={<Prescription />} />
                 <Route path="update/prescriptions/:userID/:prescriptionID" element={<Viewprescription />} />
-                <Route path="records/prescriptions/:userID/:prescriptionID" element={<Viewprescription />} />
-                <Route path="update/addprescription/:userID" element={<Addprescription />} />
-                <Route path="records/addprescription/:userID" element={<Addprescription />} />
+                <Route path="records/prescriptions/:userID/:prescriptionID" element={<Viewprescription />} /> */}
               </Route>
             </Route>
 

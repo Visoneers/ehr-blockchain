@@ -23,7 +23,6 @@ const societySchema = new BaseSchema({
     contact: {
         type: Number,
     },
-
     area: {
         type: String
     },
@@ -33,7 +32,7 @@ const societySchema = new BaseSchema({
     state: {
         type: String
     },
-    pincode: {
+    pinCode: {
         type: Number
     }
     ,

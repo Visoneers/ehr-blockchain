@@ -27,7 +27,7 @@ const menuOptions = [{
 }, {
   "id": 4,
   "title": "Update Records",
-  "to": "/hospitaladmin/update",
+  "to": "/hospitaladmin/records",
   "icon": <UpdateIcon />
 },
 ]

@@ -4,13 +4,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useTheme } from '@emotion/react';
 import { tokens } from '../../assets/theme';
 import axios from '../../api/axios';
-// import MenuItem from '@material-ui/core/MenuItem';
-
-import { DesktopDatePicker,  } from '@mui/lab';
-import {LocalizationProvider}from "@mui/x-date-pickers/LocalizationProvider"
-
-import DateAdapter from '@mui/lab/AdapterMoment';
-import MomentUtils from "@date-io/moment";
+import dayjs from 'dayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import moment from 'moment';
 
 const NewUser = () => {
@@ -29,7 +26,8 @@ const NewUser = () => {
   const [matchPwd, setMatchPwd] = useState('');
   const [validMatch, setValidMatch] = useState(false);
 
-  const [societies,setSocieties]=useState([])
+  const [societies, setSocieties] = useState([])
+
   useEffect(() => {
     setValidEmail(EMAIL_REGEX.test(email));
   }, [email])
@@ -41,7 +39,7 @@ const NewUser = () => {
 
   const handleInputChange = e => {
     const { name, value } = e.target
-    console.log(name,value)
+    console.log(name, value)
     setValues({
       ...values,
       [name]: value
@@ -79,6 +77,7 @@ const NewUser = () => {
   }
 
   const handleDateChange = (e) => {
+    console.log(e);
     setValues({
       ...values,
       dob: moment(e).format('DD,MM,YYYY')
@@ -92,8 +91,8 @@ const NewUser = () => {
       console.log(email, pwd, values);
       const response = await axios.post(REGISTER_URL,
         // JSON.stringify({ email:"rohitdivekar463@gmail.com", password:pwd,...values, name:values.fullName ,role:"644e0dc7e22255e5791984b8" }),
-       
-        JSON.stringify({ email,password:pwd, ...values, name:values.fullName,role:"644e0dc7e22255e5791984b8" }),
+
+        JSON.stringify({ email, password: pwd, ...values, name: values.fullName, role: "644e0dc7e22255e5791984b8" }),
         {
           headers: { 'Content-Type': 'application/json' },
           withCredentials: true
@@ -122,7 +121,7 @@ const NewUser = () => {
 
     const fetchSocieties = async () => {
       try {
-       
+
         const response = await axios.get(
           `http://localhost:3000/society/`,
           {
@@ -147,7 +146,9 @@ const NewUser = () => {
       controller.abort();
     };
   }, []);
-  console.log(societies,"societies")
+  
+  console.log(values);
+  console.log(societies, "societies")
   return (
     <>
       <Box m='20px'>
@@ -211,46 +212,46 @@ const NewUser = () => {
                   Must match the first password input field.
                 </p>
 
-                <Box mt='15px'sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <InputLabel margin='dense' sx={{ fontSize: '14px', fontWeight: '500'}}>Diseases</InputLabel>
-                  <Button sx={{backgroundColor: colors.blueAccent[800], p: 1}} onClick={() => addMultiInput('diseases')}>Add More</Button>
+                <Box mt='15px' sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <InputLabel margin='dense' sx={{ fontSize: '14px', fontWeight: '500' }}>Diseases</InputLabel>
+                  <Button sx={{ backgroundColor: colors.blueAccent[800], p: 1 }} onClick={() => addMultiInput('diseases')}>Add More</Button>
                 </Box>
-                { values.diseases.map((data, index) => {
+                {values.diseases.map((data, index) => {
                   return (
-                    <Box sx={{display: 'flex', alignItems: 'center'}} key={index}>
-                    <TextField
-                      fullWidth
-                      variant="outlined"
-                      label="Disease"
-                      name="diseases"
-                      value={data}
-                      onChange={e => handleMultipleInputChange(e, index)}
-                      margin="normal"
-                    />
-                    <IconButton type='button' sx={{ width: '50px', height: '50px'}} onClick={() => deleteMultiInput('diseases', index)}><DeleteIcon /></IconButton>
-                  </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }} key={index}>
+                      <TextField
+                        fullWidth
+                        variant="outlined"
+                        label="Disease"
+                        name="diseases"
+                        value={data}
+                        onChange={e => handleMultipleInputChange(e, index)}
+                        margin="normal"
+                      />
+                      <IconButton type='button' sx={{ width: '50px', height: '50px' }} onClick={() => deleteMultiInput('diseases', index)}><DeleteIcon /></IconButton>
+                    </Box>
                   )
                 })
                 }
-                
-                <Box mt='15px'sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <InputLabel margin='dense' sx={{ fontSize: '14px', fontWeight: '500'}}>Alergies</InputLabel>
-                  <Button sx={{backgroundColor: colors.blueAccent[800], p: 1}} onClick={() => addMultiInput('allergies')}>Add More</Button>
+
+                <Box mt='15px' sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <InputLabel margin='dense' sx={{ fontSize: '14px', fontWeight: '500' }}>Alergies</InputLabel>
+                  <Button sx={{ backgroundColor: colors.blueAccent[800], p: 1 }} onClick={() => addMultiInput('allergies')}>Add More</Button>
                 </Box>
-                { values.allergies.map((data, index) => {
+                {values.allergies.map((data, index) => {
                   return (
-                    <Box sx={{display: 'flex', alignItems: 'center'}} key={index}>
-                    <TextField
-                      fullWidth
-                      variant="outlined"
-                      label="Allergies"
-                      name="allergies"
-                      value={data}
-                      onChange={e => handleMultipleInputChange(e, index)}
-                      margin="normal"
-                    />
-                    <IconButton type='button' sx={{ width: '50px', height: '50px'}} onClick={() => deleteMultiInput('allergies',index)}><DeleteIcon /></IconButton>
-                  </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }} key={index}>
+                      <TextField
+                        fullWidth
+                        variant="outlined"
+                        label="Allergies"
+                        name="allergies"
+                        value={data}
+                        onChange={e => handleMultipleInputChange(e, index)}
+                        margin="normal"
+                      />
+                      <IconButton type='button' sx={{ width: '50px', height: '50px' }} onClick={() => deleteMultiInput('allergies', index)}><DeleteIcon /></IconButton>
+                    </Box>
                   )
                 })
                 }
@@ -268,7 +269,7 @@ const NewUser = () => {
                   onChange={handleInputChange}
                   margin="normal"
                 />
-                <FormControl sx={{ m: "10px" }}>
+                <FormControl sx={{ m: "10px"}} fullWidth>
                   <FormLabel>Gender</FormLabel>
                   <RadioGroup row
                     name="gender"
@@ -283,49 +284,49 @@ const NewUser = () => {
                     }
                   </RadioGroup>
                 </FormControl>
-                {/* <LocalizationProvider dateAdapter={DateAdapter} utils={MomentUtils}>
-                  <DesktopDatePicker
-                    label="Date of Birth"
-                    naem='dob'
-                    format='MMMM D, YYYY'
-                    inputFormat="MMMM D, YYYY"
-                    value={values.dob}
-                    onChange={handleDateChange}
-                    renderInput={(params) => <TextField {...params} />}
-                    disableMaskedInput={true}
-                  />
-                </LocalizationProvider> */}
- <TextField
-  fullWidth
-  variant="outlined"
-  label="Society Id"
-  name="societyId"
-  select
-  value={values.societyId}
-  onChange={handleInputChange}
-  margin="normal"
-  SelectProps={{
-    MenuProps: {
-      getContentAnchorEl: null,
-      anchorOrigin: {
-        vertical: 'bottom',
-        horizontal: 'right',
-      },
-    },
-  }}
-  inputProps={{
-    style: { padding: '10px' }, // Custom styling for the input text
-  }}
-  SelectDisplayProps={{
-    style: { maxHeight: '200px' }, // Custom styling for the options list
-  }}
->
-  {societies.map(society => (
-    <MenuItem key={society._id} value={society._id}>
-      {society.name}
-    </MenuItem>
-  ))}
-</TextField>
+
+                <Box>
+                <LocalizationProvider dateAdapter={AdapterDayjs} defaultValue={dayjs('2022-04-17')}>
+                    <DatePicker
+                      label="Enter Birth Date"
+                      format='MMMM D, YYYY'
+                      inputFormat="MMMM D, YYYY"
+                      onChange={handleDateChange}
+                    />
+                </LocalizationProvider>
+                </Box>
+
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  label="Society Id"
+                  name="societyId"
+                  select
+                  value={values.societyId}
+                  onChange={handleInputChange}
+                  margin="normal"
+                  SelectProps={{
+                    MenuProps: {
+                      getContentAnchorEl: null,
+                      anchorOrigin: {
+                        vertical: 'bottom',
+                        horizontal: 'right',
+                      },
+                    },
+                  }}
+                  inputProps={{
+                    style: { padding: '10px' }, // Custom styling for the input text
+                  }}
+                  SelectDisplayProps={{
+                    style: { maxHeight: '200px' }, // Custom styling for the options list
+                  }}
+                >
+                  {societies.map(society => (
+                    <MenuItem key={society._id} value={society._id}>
+                      {society.name}
+                    </MenuItem>
+                  ))}
+                </TextField>
 
                 {!values.societyId ?
                   <>
@@ -348,6 +349,15 @@ const NewUser = () => {
                       margin="normal"
                     />
                   </> : null}
+                  <TextField
+                  fullWidth
+                  variant="outlined"
+                  label="Guardian Name"
+                  name="guardianName"
+                  value={values.guardianName}
+                  onChange={handleInputChange}
+                  margin="normal"
+                />
                 <TextField
                   fullWidth
                   variant="outlined"
@@ -366,29 +376,29 @@ const NewUser = () => {
                   onChange={handleInputChange}
                   margin="normal"
                 />
-                <Box mt='15px'sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <InputLabel margin='dense' sx={{ fontSize: '14px', fontWeight: '500'}}>Regular Medicines</InputLabel>
-                  <Button sx={{backgroundColor: colors.blueAccent[800], p: 1}} onClick={() => addMultiInput('medicines')}>Add More</Button>
+                <Box mt='15px' sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <InputLabel margin='dense' sx={{ fontSize: '14px', fontWeight: '500' }}>Regular Medicines</InputLabel>
+                  <Button sx={{ backgroundColor: colors.blueAccent[800], p: 1 }} onClick={() => addMultiInput('medicines')}>Add More</Button>
                 </Box>
-                { values.medicines.map((data, index) => {
+                {values.medicines.map((data, index) => {
                   return (
-                    <Box sx={{display: 'flex', alignItems: 'center'}} key={index}>
-                    <TextField
-                      fullWidth
-                      variant="outlined"
-                      label="Medicines"
-                      name="medicines"
-                      value={data}
-                      onChange={e => handleMultipleInputChange(e, index)}
-                      margin="normal"
-                    />
-                    <IconButton type='button' sx={{ width: '50px', height: '50px'}} onClick={() => deleteMultiInput('medicines',index)}><DeleteIcon /></IconButton>
-                  </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }} key={index}>
+                      <TextField
+                        fullWidth
+                        variant="outlined"
+                        label="Medicines"
+                        name="medicines"
+                        value={data}
+                        onChange={e => handleMultipleInputChange(e, index)}
+                        margin="normal"
+                      />
+                      <IconButton type='button' sx={{ width: '50px', height: '50px' }} onClick={() => deleteMultiInput('medicines', index)}><DeleteIcon /></IconButton>
+                    </Box>
                   )
                 })
                 }
-                <p className={ errors ? 'instruction' : 'offscreen'}>{errors}</p><br />
-                <Box mt='20px' sx={{ display: 'flex', justifyContent: 'flex-end'}}>
+                <p className={errors ? 'instruction' : 'offscreen'}>{errors}</p><br />
+                <Box mt='20px' sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                   <Button sx={{
                     m: 2, backgroundColor: colors.redAccent[800], fontSize: "13px",
                     padding: "10px 20px",
@@ -423,6 +433,7 @@ const initialFValues = {
   address: "",
   age: 0,
   dob: "",
+  guardianName: "",
   guardianNo: "",
   insauranceName: "",
   diseases: [""],
